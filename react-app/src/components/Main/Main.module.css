@@ -1,0 +1,82 @@
+.mainHeader {
+    background: linear-gradient(180deg, #101011 60.41%, #5A30D4 91.4%);
+    height: 80vh;
+    min-height: 600px;
+    margin-top: -55px;
+    overflow: hidden;
+}
+
+.heroWrapper {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    margin: -25px auto 0 auto;
+    max-width: 1210px;
+    padding: 55px 0 0 48px;
+    width: 100%;
+}
+
+.heroWrapper h2 {
+    color: #fff;
+    margin-bottom: 56px;
+}
+
+.heroWrapper h2, section h2 {
+    font-size: 48px;
+    font-weight: 400;
+}
+
+.mainSection {
+    margin: 0 auto;
+    max-width: 1096px;
+    padding: 80px 16px;
+    text-align: center;
+}
+
+.mainSection h2 {
+    margin-bottom: 36px;
+}
+
+.mainSection p {
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+.mainBtn {
+    background: #7847F8;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 16px;
+    transition: all 200ms;
+}
+
+.mainBtn:hover {
+    background: #5E32DE;
+}
+
+.headerContent {
+    margin-right: 16px;
+    max-width: 629px;
+}
+
+.productShowcaseLarge {
+    padding: 0 16px 160px;
+}
+
+.productShowcaseLarge > div {
+    align-items: center;
+    background: lightgray;
+    display: flex;
+    height: 762px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1210px;
+}
+
+footer {
+    background: #7847F8;
+    color: #fff;
+    padding: 16px;
+    text-align: center;
+}
