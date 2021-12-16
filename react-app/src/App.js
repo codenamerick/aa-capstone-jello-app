@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -13,6 +13,7 @@ import Main from './components/Main';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const session = useSelector((state) => (state.session));
 
   useEffect(() => {
     (async() => {
@@ -27,8 +28,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
+        <Route path='/' exact={true} >
+          {session.user && <Redirect to='/dashboard'/>}
+          <NavBar />
+          <Main />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -41,12 +46,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/boards' exact={true} >
+        <ProtectedRoute path='/dashboard' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
-        <Route path='/' exact={true} >
-          <Main />
-        </Route>
 
       </Switch>
     </BrowserRouter>
