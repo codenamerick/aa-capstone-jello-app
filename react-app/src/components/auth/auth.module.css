@@ -4,8 +4,10 @@
     padding: 80px 16px 0 16px;
 }
 
-.authWrapper form {
+.authWrapper > div {
     background: #18181B;
+    display: flex;
+    flex-direction: column;
     /* box-shadow: 0 10px 25px rgb(148 106 249 / 40%), 0 20px 48px rgb(148 106 249 / 40%), 0 1px 4px rgb(148 106 249 / 40%); */
     margin: 0 auto;
     max-width: 400px;
@@ -21,6 +23,23 @@
     outline: none;
     padding: 9px 16px;
     transition: all 200ms;
+}
+
+.formLogo:first-child {
+    color: #fff;
+    margin: 30px auto 34px;
+}
+
+form > .inputWrapper {
+    margin-top: 26px;
+}
+
+form > .inputWrapper ~ .inputWrapper {
+    margin-top: 0;
+}
+
+.inputWrapper:last-child input {
+    margin-bottom: 16px;
 }
 
 .authWrapper input:hover {
@@ -55,4 +74,18 @@
 .inputWrapper {
     display: flex;
     flex-direction: column;
+}
+
+.authWrapper a {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.authWrapper p {
+    color: #9150FB;
+    margin-bottom: 26px;
+}
+
+.formErrors div {
+    color: #E71E23;
 }
