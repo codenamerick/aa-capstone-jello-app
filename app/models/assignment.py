@@ -10,3 +10,6 @@ class Assignment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     card_id = db.Column(db.Integer, db.ForeignKey(
         'cards.id'), nullable=False)
+
+    users = db.relationship('User', back_populates='assignments')
+    cards = db.relationship('Card', back_populates='assignments')

@@ -17,21 +17,13 @@ class Board(db.Model):
     lists = db.relationship('List', back_populates='boards', cascade='all, delete')
 
     def to_dict(self):
-        if len(self.lists):
-            list = self.lists[0].to_dict()
-            list_id = list['id']
-
         return {
             'id': self.id,
             'name': self.name,
             'image_url': self.image_url,
             'user_id': self.user_id,
             'members': [user.id for user in self.members],
-            'member_list': [user.to_dict() for user in self.members],
-            'lists': {list_id: self.lists[0].to_dict()} if len(self.lists) else {},
+            'lists': [list.to_dict() for list in self.lists],
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
             'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
         }
-
-    def member_ids(self):
-        return [user.id for user in self.members]
