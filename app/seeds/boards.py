@@ -12,13 +12,13 @@ def seed_boards():
         name='Board 3', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782656/board-bg-3_xttmed.png', user_id=1
     )
     board_four = Board(
-        name='Board 4', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782656/board-bg-3_xttmed.png', user_id=1
+        name='Board 4', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782656/board-bg-3_xttmed.png', user_id=2
     )
     board_five = Board(
-        name='Board 5', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782657/board-bg-1_qkviry.png', user_id=1
+        name='Board 5', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782657/board-bg-1_qkviry.png', user_id=2
     )
     board_six = Board(
-        name='Board 6', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782657/board-bg-2_y3xzw7.png', user_id=1
+        name='Board 6', image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782657/board-bg-2_y3xzw7.png', user_id=2
     )
 
     db.session.add(board_one)
