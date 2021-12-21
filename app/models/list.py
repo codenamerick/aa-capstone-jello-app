@@ -21,7 +21,7 @@ class List(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'cards': {},
+            'cards': [card.to_dict() for card in self.cards],
             'board_id': self.board_id,
             'user_id': self.user_id,
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),

@@ -27,3 +27,6 @@ class Board(db.Model):
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
             'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
         }
+
+    def member_ids(self):
+        return [user.id for user in self.members]
