@@ -6,16 +6,24 @@ import style from "./Dashboard.module.css";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const boards = useSelector((state) => (state.boards));
-    console.log('boards from dashboard comp----: ', boards);
+    const sessionUser = useSelector((state) => (state.session.user));
+    const userId = sessionUser.id
+    const boards = useSelector((state) => Object.values(state.boards));
+    console.log('boards from dashboard---: ', boards)
+    console.log('user from dashboard comp----: ', userId);
 
     useEffect(() => {
-        dispatch(boardActions.getBoardsThunk());
+        dispatch(boardActions.getBoardsThunk(userId));
     }, [dispatch])
 
     return (
         <div>
             <h1>Dashboard</h1>
+            <div>
+                {boards.map((board) => (
+                    <li key={board.id}>{board.name}</li>
+                ))}
+            </div>
         </div>
     )
 };
