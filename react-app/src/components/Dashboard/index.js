@@ -17,12 +17,22 @@ const Dashboard = () => {
     }, [dispatch])
 
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className={style.dashboardWrapper}>
             <div>
-                {boards.map((board) => (
-                    <li key={board.id}>{board.name}</li>
-                ))}
+                <div className={style.dashboardHeader}>
+                    <h2>My Boards</h2>
+                    <div className={style.addBtn}>+</div>
+                </div>
+                <div className={style.cardWrapper}>
+                    {boards.map((board) => (
+                        <li key={board.id} className={style.boardCard} style={{backgroundImage:'url(' + board.image_url + ')'}}>
+                            <div className={style.cardOverlay}></div>
+                            <div className={style.boardTitle}>
+                                <p>{board.name}</p>
+                            </div>
+                        </li>
+                    ))}
+                </div>
             </div>
         </div>
     )

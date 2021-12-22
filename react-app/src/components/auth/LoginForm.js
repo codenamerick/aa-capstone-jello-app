@@ -9,6 +9,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
+  const userName = user.username;
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -28,7 +29,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to={`/${userName}/boards`} />;
   }
 
   return (

@@ -11,6 +11,8 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
+  const userName = user.username;
+  console.log('USER----: ', userName)
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
@@ -40,7 +42,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to={`/${userName}/boards`} />;
   }
 
   return (

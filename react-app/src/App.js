@@ -15,6 +15,8 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const session = useSelector((state) => (state.session));
+  const user = useSelector(state => state.session.user);
+  const userName = user?.username;
 
   useEffect(() => {
     (async() => {
@@ -29,10 +31,10 @@ function App() {
 
   return (
     <BrowserRouter>
+    <NavBar />
       <Switch>
         <Route path='/' exact={true} >
-          {session.user && <Redirect to='/dashboard'/>}
-          <NavBar />
+          {session.user && <Redirect to={`/${userName}/boards`}/>}
           <Main />
         </Route>
         <Route path='/login' exact={true}>
@@ -47,7 +49,7 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/:username/boards' exact={true} >
+        <ProtectedRoute path={`/${userName}/boards`} exact={true} >
           <Dashboard />
         </ProtectedRoute>
 
