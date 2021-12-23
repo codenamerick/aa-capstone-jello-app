@@ -15,6 +15,14 @@ def get_boards():
 
     return {'boards': [board.to_dict() for board in user_boards]}
 
+@board_routes.route('/', methods=['POST'])
+# @login_required
+def create_board():
+    boards = Board.query.all()
+    user_boards = [board for board in boards if current_user.id in board.member_ids()]
+
+    return {'boards': [board.to_dict() for board in user_boards]}
+
 
 # @board_routes.route('/<int:boardId>/')
 # @login_required

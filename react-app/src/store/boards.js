@@ -19,13 +19,19 @@ export const getBoardsThunk = () => async(dispatch) => {
 
 // Boards reducer
 export default function boardReducer(state = {}, action) {
-    const newState = {...state};
+    let newState;
     switch (action.type) {
         case GET_BOARDS:
+            newState = {...state}
+
             for (let board of action.boards) {
                 newState[board.id] = board;
             }
 
+            return newState;
+
+        case 'logout':
+            newState = {};
             return newState;
         default:
             return state;
