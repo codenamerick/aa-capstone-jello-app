@@ -9,7 +9,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
-  const userName = user.username;
+  const userName = user?.username;
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {

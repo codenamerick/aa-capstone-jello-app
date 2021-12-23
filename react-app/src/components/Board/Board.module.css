@@ -1,0 +1,39 @@
+nav {
+    background: #5A30D4;
+}
+
+.navLogo {
+    margin-right: 46px;
+}
+
+.mainNavWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 8px 16px;
+}
+
+.mainNavWrapper ul {
+    align-items: center;
+    display: flex;
+}
+
+.mainNavWrapper a {
+    color: #000;
+}
+
+.mainBtn {
+    background: #fff;
+    border-radius: 4px;
+    color: #000;
+    margin-left: 4px;
+    padding: 10px 16px;
+    transition: all 200ms;
+}
+
+.mainBtn:hover {
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}

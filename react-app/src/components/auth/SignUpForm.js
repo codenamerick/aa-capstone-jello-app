@@ -11,7 +11,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
-  const userName = user.username;
+  const userName = user?.username;
   console.log('USER----: ', userName)
   const dispatch = useDispatch();
 

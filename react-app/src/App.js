@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Main from './components/Main';
 import Dashboard from './components/Dashboard';
+import Board from './components/Board';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,10 +32,10 @@ function App() {
 
   return (
     <BrowserRouter>
-    <NavBar />
       <Switch>
         <Route path='/' exact={true} >
           {session.user && <Redirect to={`/${userName}/boards`}/>}
+          <NavBar />
           <Main />
         </Route>
         <Route path='/login' exact={true}>
@@ -49,7 +50,10 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path={`/${userName}/boards`} exact={true} >
+        <ProtectedRoute path={`/boards/:boardId`} exact={true} >
+          <Board />
+        </ProtectedRoute>
+        <ProtectedRoute path={`/:username/boards`} exact={true} >
           <Dashboard />
         </ProtectedRoute>
 

@@ -2,16 +2,16 @@
 const GET_BOARDS = 'boards/GET_BOARDS';
 
 // Board actions
-const getBoards = (userId) => ({
+const getBoards = (boards) => ({
     type: GET_BOARDS,
-    userId
+    boards
 });
 
 // Board Thunks
-export const getBoardsThunk = (userId) => async(dispatch) => {
-    const res = await fetch(`/api/boards/users/${userId}/`);
+export const getBoardsThunk = () => async(dispatch) => {
+    const res = await fetch(`/api/boards/`);
     const data = await res.json();
-    console.log('boards res from thunk---: ', data.boards);
+
     dispatch(getBoards(data.boards));
 
     return data.boards;
@@ -22,8 +22,7 @@ export default function boardReducer(state = {}, action) {
     const newState = {...state};
     switch (action.type) {
         case GET_BOARDS:
-            console.log('action from reducer---: ', action)
-            for (let board of action.userId) {
+            for (let board of action.boards) {
                 newState[board.id] = board;
             }
 
