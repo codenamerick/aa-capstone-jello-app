@@ -4,6 +4,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from app.models import Board, Member, User, db
 from app.forms.new_board_form import NewBoardForm
+from app.forms.edit_board_form import EditBoardForm
 
 board_routes = Blueprint('boards', __name__)
 
@@ -45,27 +46,16 @@ def new_board():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-@board_routes.route('/', methods=['PUT'])
-# @login_required
-def new_board():
-    form = NewBoardForm()
+@board_routes.route('/<int:boardId>', methods=['PUT'])
+@login_required
+def edit_board(boardId):
+    form = EditBoardForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    board = Board.query.get(int(boardId))
 
-    if form.validate_on_submit():
-        board = Board(
-            name=form.data['name'],
-            image_url='https://res.cloudinary.com/dedpxzbak/image/upload/v1639782657/board-bg-1_qkviry.png',
-            user_id=current_user.id
-        )
+    if form.validate_on_submit() and board.user_id == current_user.id:
+        board.name=form.data['name']
 
-        db.session.add(board)
-        db.session.commit()
-        member = Member(
-            user_id=current_user.id,
-            board_id=board.to_dict()['id']
-        )
-
-        db.session.add(member)
         db.session.commit()
 
         return board.to_dict()
@@ -73,9 +63,13 @@ def new_board():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# @board_routes.route('/<int:boardId>/')
-# @login_required
-# def get_one_board(boardId):
-#     board = Board.query.get(boardId)
+@board_routes.route('/<int:boardId>', methods=['DELETE'])
+@login_required
+def delete_board(boardId):
+    board=Board.query.get(int(boardId))
 
-#     return board.to_dict()
+    if board.user_id == current_user.id:
+        db.session.delete(board)
+        db.session.commit()
+
+        return board.to_dict()
