@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Route, Redirect, Link } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import BoardNav from '../Board/BoardNav';
+import CreateBoardFormModal from '../CreateBoardModal';
 import style from "./Dashboard.module.css";
 
 const Dashboard = () => {
@@ -22,7 +23,7 @@ const Dashboard = () => {
                 <div>
                     <div className={style.dashboardHeader}>
                         <h2>My Boards</h2>
-                        <div className={style.addBtn}>+</div>
+                        <CreateBoardFormModal />
                     </div>
                     <div className={style.cardWrapper}>
                         {boards.map((board) => (

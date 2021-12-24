@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import CreateBoardMainBtn from '../CreateBoardModal/CreateBoardMainBtn';
 import style from "./Board.module.css";
 
 const BoardNav = () => {
@@ -24,9 +25,7 @@ const BoardNav = () => {
             </NavLink>
           </li>
           <li>
-            <div className={style.mainBtn}>
-              Create Board
-            </div>
+            <CreateBoardMainBtn />
           </li>
         </ul>
         <ul>

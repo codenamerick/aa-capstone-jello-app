@@ -1,0 +1,31 @@
+.primaryAddBtn {
+    background: #fff;
+    border-radius: 4px;
+    color: #000;
+    margin-left: 4px;
+    padding: 10px 16px;
+    transition: all 200ms;
+}
+
+.primaryAddBtn:hover {
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.secondaryAddBtn {
+    align-items: center;
+    background: #3D3D40;
+    border-radius: 50%;
+    display: flex;
+    height: 34px;
+    justify-content: center;
+    transition: all 200ms;
+    width: 34px;
+}
+
+.secondaryAddBtn:hover {
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+}

@@ -25,23 +25,6 @@
     font-weight: 400;
 }
 
-.addBtn {
-    align-items: center;
-    background: #3D3D40;
-    border-radius: 50%;
-    display: flex;
-    height: 34px;
-    justify-content: center;
-    transition: all 200ms;
-    width: 34px;
-}
-
-.addBtn:hover {
-    background: #fff;
-    color: #000;
-    cursor: pointer;
-}
-
 .cardWrapper {
     display: flex;
     flex-wrap: wrap;
@@ -75,7 +58,6 @@
     height: 100%;
     position: absolute;
     width: 100%;
-    z-index: 2;
 }
 
 .boardTitle {
@@ -83,5 +65,4 @@
     left: 16px;
     position: absolute;
     top: 16px;
-    z-index: 3;
 }
