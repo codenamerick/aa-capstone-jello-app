@@ -11,7 +11,7 @@ const CreateBoardMainBtn = () => {
             <div onClick={() => setShowMainModal(true)} className={style.primaryAddBtn}>Create Board</div>
             {showMainModal && (
                 <MainModal onClose={() => setShowMainModal(false)}>
-                    <CreateBoardForm />
+                    <CreateBoardForm setShowMainModal={setShowMainModal}/>
                 </MainModal>
             )}
         </>

@@ -29,3 +29,81 @@
     color: #000;
     cursor: pointer;
 }
+
+/* modal forms */
+
+.formWrapper {
+    background: #18181B;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 30px 16px;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputWrapper input {
+    background: #3D3D40;
+    border: 1px solid #3D3D40;
+    border-radius: 4px;
+    color: #fff;
+    margin-bottom: 26px;
+    outline: none;
+    padding: 9px 16px;
+    transition: all 200ms;
+}
+
+.inputWrapper input:hover {
+    border: 1px solid #535355;
+}
+
+.inputWrapper input:focus {
+    background: #000;
+    border: 1px solid #9150FB;
+}
+
+.inputWrapper label {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.mainBtn {
+    background: #242527;
+    border: none;
+    border-radius: 4px;
+    color: #505051;
+    padding: 10px 16px;
+    transition: all 200ms;
+}
+
+.mainBtn:hover {
+    background: #9150FB;
+    color: #fff;
+    cursor: pointer;
+}
+
+/*.authWrapper a {
+    margin: 0 auto;
+    width: fit-content;
+}*/
+
+.inputWrapper p {
+    color: #9150FB;
+    margin: 0 auto;
+    margin-top: 16px;
+    width: fit-content;
+}
+
+.inputWrapper p:hover {
+    cursor: pointer;
+}
+
+.formErrors div {
+    color: #E71E23;
+    margin-bottom: 16px;
+}
