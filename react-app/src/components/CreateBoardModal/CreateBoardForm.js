@@ -5,6 +5,7 @@ import * as boardActions from '../../store/boards';
 import style from './CreateBoard.module.css';
 
 const CreateBoardForm = ({setShowMainModal}) => {
+    // console.log('PROPS----: ', setShowMainModal)
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session);
@@ -47,7 +48,11 @@ const CreateBoardForm = ({setShowMainModal}) => {
         history.push(`/boards/${newBoard.id}`)
     };
 
-    console.log('errors: ', errors)
+    const handleClose = () => {
+        console.log('cancel!!');
+        // setShowMainModal(false);
+    };
+
     return (
         <div className={style.formWrapper}>
             <div>
@@ -68,7 +73,7 @@ const CreateBoardForm = ({setShowMainModal}) => {
                     </div>
                     <div className={style.inputWrapper}>
                         <button type='submit' className={style.mainBtn}>Create Board</button>
-                        <p onClick={() => console.log('cancel!!')}>Cancel</p>
+                        <p onClick={handleClose}>Cancel</p>
                     </div>
                 </form>
             </div>

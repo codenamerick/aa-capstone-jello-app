@@ -1,5 +1,8 @@
 nav {
     background: #5A30D4;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
 }
 
 .navLogo {

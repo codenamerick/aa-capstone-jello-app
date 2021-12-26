@@ -27,13 +27,18 @@ const Dashboard = () => {
                     </div>
                     <div className={style.cardWrapper}>
                         {boards.map((board) => (
-                            <Link key={board.id} className={style.boardCard} to={`/boards/${board.id}`}>
+                            <div key={board.id} className={style.boardCard}>
                                 <div className={style.boardBg} style={{backgroundImage:'url(' + board.image_url + ')'}}></div>
                                 <div className={style.cardOverlay}></div>
                                 <div className={style.boardTitle}>
                                     <p>{board.name}</p>
                                 </div>
-                            </Link>
+                                <Link to={`/boards/${board.id}`} className={style.boardLink}>
+                                </Link>
+                                <div className={style.boardMenuBtn} onClick={() => console.log('Open menu!')}>
+                                    menu
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>

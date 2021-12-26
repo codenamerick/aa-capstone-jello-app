@@ -68,6 +68,11 @@ def edit_board(boardId):
 def delete_board(boardId):
     board=Board.query.get(int(boardId))
 
+    # db.session.delete(board)
+    # db.session.commit()
+
+    # return board.to_dict()
+
     if board.user_id == current_user.id:
         db.session.delete(board)
         db.session.commit()

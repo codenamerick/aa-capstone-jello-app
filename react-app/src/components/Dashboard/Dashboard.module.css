@@ -66,3 +66,20 @@
     position: absolute;
     top: 16px;
 }
+
+.boardLink {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.boardMenuBtn {
+    background: black;
+    padding: 10px;
+    position: absolute;
+    right: 0%;
+}
+
+.boardMenuBtn:hover {
+    cursor: pointer;
+}
