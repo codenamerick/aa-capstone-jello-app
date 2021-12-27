@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Redirect, Link } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
@@ -11,6 +11,7 @@ const Dashboard = () => {
     const sessionUser = useSelector((state) => (state.session.user));
     const userId = sessionUser.id
     const boards = useSelector((state) => Object.values(state.boards));
+    const [boardCardId, setBoardCardId] = useState('');
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
@@ -35,9 +36,15 @@ const Dashboard = () => {
                                 </div>
                                 <Link to={`/boards/${board.id}`} className={style.boardLink}>
                                 </Link>
-                                <div className={style.boardMenuBtn} onClick={() => console.log('Open menu!')}>
-                                    menu
+                                <div id={`boardMenuBtn-${board.id}`} className={style.boardMenuBtn} onClick={() => setBoardCardId(board.id)}>
+                                    <i className="fas fa-ellipsis-h"></i>
                                 </div>
+                                {boardCardId === board.id && (
+                                    <>
+                                        <div className={style.boardMenuModalBg} onClick={() => setBoardCardId('')}></div>
+                                        <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>menu links</div>
+                                    </>
+                                )}
                             </div>
                         ))}
                     </div>

@@ -72,13 +72,40 @@
     width: 100%;
 }
 
+/* board menu */
 .boardMenuBtn {
-    background: black;
+    opacity: 0;
     padding: 10px;
     position: absolute;
-    right: 0%;
+    right: 8px;
+    top: 12px;
+    transition: all 200ms;
+}
+
+.boardCard:hover .boardMenuBtn {
+    opacity: 1;
 }
 
 .boardMenuBtn:hover {
     cursor: pointer;
+    transform: scale(1.2);
+}
+
+.boardMenuModalBg {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 12;
+}
+
+.boardMenuWrapper {
+    background: #3d3d40;
+    border-radius: 4px;
+    padding: 16px;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    z-index: 13;
 }
