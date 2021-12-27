@@ -11,7 +11,7 @@ const CreateBoardFormModal = () => {
             <div onClick={() => setShowMainModal(true)} className={style.secondaryAddBtn}>+</div>
             {showMainModal && (
                 <MainModal onClose={() => setShowMainModal(false)}>
-                    <CreateBoardForm />
+                    <CreateBoardForm setShowMainModal={setShowMainModal}/>
                 </MainModal>
             )}
         </>

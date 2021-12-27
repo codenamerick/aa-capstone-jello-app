@@ -5,7 +5,6 @@ import * as boardActions from '../../store/boards';
 import style from './CreateBoard.module.css';
 
 const CreateBoardForm = ({setShowMainModal}) => {
-    // console.log('PROPS----: ', setShowMainModal)
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session);
@@ -44,13 +43,12 @@ const CreateBoardForm = ({setShowMainModal}) => {
         const newBoard = await dispatch(boardActions.createBoardThunk(formData));
 
         reset();
-        // setShowMainModal(false);
+        setShowMainModal(false);
         history.push(`/boards/${newBoard.id}`)
     };
 
     const handleClose = () => {
-        console.log('cancel!!');
-        // setShowMainModal(false);
+        setShowMainModal(false);
     };
 
     return (
