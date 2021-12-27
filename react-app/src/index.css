@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+body {
+    background: #101011;
+}
+
 a {
     display: inline-block;
     text-decoration: none;
