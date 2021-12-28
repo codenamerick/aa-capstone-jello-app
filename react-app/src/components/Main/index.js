@@ -29,7 +29,17 @@ const Main = () => {
                 </div>
             </section>
             <footer>
-                <p>Created By: Author</p>
+                <div>
+                    <p>Crafted By:</p>
+                    <div className={style.iconWrapper}>
+                        <Link to='https://github.com/codenamerick' target='_blank' className={style.socialLink}>
+                            <i class="fab fa-github-square"></i>
+                        </Link>
+                        <Link to='https://www.linkedin.com/in/rick-arocho/' target='_blank' className={style.socialLink}>
+                            <i class="fab fa-linkedin"></i>
+                        </Link>
+                    </div>
+                </div>
             </footer>
         </div>
     )

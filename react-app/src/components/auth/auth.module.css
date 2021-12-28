@@ -8,7 +8,6 @@
     background: #18181B;
     display: flex;
     flex-direction: column;
-    /* box-shadow: 0 10px 25px rgb(148 106 249 / 40%), 0 20px 48px rgb(148 106 249 / 40%), 0 1px 4px rgb(148 106 249 / 40%); */
     margin: 0 auto;
     max-width: 400px;
     padding: 30px 16px;
@@ -56,7 +55,7 @@ form > .inputWrapper ~ .inputWrapper {
     margin-bottom: 10px;
 }
 
-.mainBtn {
+.mainBtn, .demoBtn {
     background: #242527;
     border: none;
     border-radius: 4px;
@@ -65,10 +64,16 @@ form > .inputWrapper ~ .inputWrapper {
     transition: all 200ms;
 }
 
-.mainBtn:hover {
+.mainBtn:hover, .demoBtn {
     background: #9150FB;
     color: #fff;
     cursor: pointer;
+}
+
+.demoBtn {
+    font-size: 13px;
+    margin-top: 16px;
+    text-align: center;
 }
 
 .inputWrapper {

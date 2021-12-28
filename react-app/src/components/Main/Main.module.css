@@ -85,3 +85,29 @@ footer {
     padding: 16px;
     text-align: center;
 }
+
+footer > div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+footer p {
+    margin-right: 8px;
+}
+
+.socialLink {
+    color: #fff;
+    font-size: 32px;
+    margin: 0 2px;
+    transition: all 200ms;
+}
+
+.iconWrapper {
+    transition: all 200ms;
+    width: fit-content;
+}
+
+.socialLink:hover {
+    transform: scale(1.2);
+}
