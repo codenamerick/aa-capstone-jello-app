@@ -4,13 +4,14 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import style from "./Board.module.css";
 import BoardNav from './BoardNav';
+import BoardNavSeconday from './BoardNavSeconday';
 
 const Board = () => {
     // const dispatch = useDispatch();
     // const sessionUser = useSelector((state) => (state.session.user));
     // const userId = sessionUser.id
-    // const boards = useSelector((state) => Object.values(state.boards));
-    // console.log('boards from dashboard---: ', boards)
+    const boards = useSelector((state) => (state.boards));
+    console.log('boards from board canvas---: ', boards)
     // console.log('user from dashboard comp----: ', userId);
 
     // useEffect(() => {
@@ -20,7 +21,10 @@ const Board = () => {
     return (
         <div className={style.boardWrapper}>
             <BoardNav />
-            <div>Made it to a board!</div>
+            <BoardNavSeconday />
+            <div className={style.boardCanvas}>
+                <p>placeholder p</p>
+            </div>
         </div>
     )
 };
