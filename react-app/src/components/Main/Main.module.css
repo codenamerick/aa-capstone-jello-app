@@ -27,7 +27,12 @@
     font-weight: 400;
 }
 
+.heroWrapper img {
+    width: 100%;
+}
+
 .mainSection {
+    color: #fff;
     margin: 0 auto;
     max-width: 1096px;
     padding: 80px 16px;
@@ -57,7 +62,7 @@
 
 .headerContent {
     margin-right: 16px;
-    max-width: 629px;
+    max-width: 64%;
 }
 
 .productShowcaseLarge {
@@ -66,7 +71,7 @@
 
 .productShowcaseLarge > div {
     align-items: center;
-    background: lightgray;
+    background: #fff;
     display: flex;
     height: 762px;
     justify-content: center;

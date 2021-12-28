@@ -20,6 +20,15 @@ def seed_members():
     member_six = Member(
         user_id=3, board_id=1
     )
+    member_seven = Member(
+        user_id=2, board_id=4
+    )
+    member_eight = Member(
+        user_id=2, board_id=5
+    )
+    member_nine = Member(
+        user_id=2, board_id=6
+    )
 
     db.session.add(member_one)
     db.session.add(member_two)
@@ -27,6 +36,9 @@ def seed_members():
     db.session.add(member_four)
     db.session.add(member_five)
     db.session.add(member_six)
+    db.session.add(member_seven)
+    db.session.add(member_eight)
+    db.session.add(member_nine)
 
     db.session.commit()
 

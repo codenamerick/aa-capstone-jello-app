@@ -27,8 +27,8 @@ class Card(db.Model):
             'due_date': self.due_date,
             'user_id': self.user_id,
             'list_id': self.list_id,
-            'assignments': [user.id for user in self.assignments],
-            'assignment_list': [user.to_dict() for user in self.assignments],
+            # 'assignments': [user.id for user in self.assignments],
+            # 'assignment_list': [user.to_dict() for user in self.assignments],
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
             'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
         }

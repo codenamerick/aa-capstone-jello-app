@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
 import style from "./navbar.module.css";
+import logo from '../components/Main/assets/jello-logo-main-final.svg';
 
 const NavBar = () => {
   return (
@@ -11,7 +10,7 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
-              LOGO
+              <img src={logo} alt='' />
             </NavLink>
           </li>
         </ul>
@@ -26,14 +25,6 @@ const NavBar = () => {
               Sign up
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink to='/users' exact={true} activeClassName='active'>
-              Users
-            </NavLink>
-          </li>
-          <li>
-            <LogoutButton />
-          </li> */}
         </ul>
       </div>
     </nav>

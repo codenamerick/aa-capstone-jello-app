@@ -23,7 +23,11 @@ class Board(db.Model):
             'image_url': self.image_url,
             'user_id': self.user_id,
             'members': [user.id for user in self.members],
+            'member_list': [user.to_dict() for user in self.members],
             'lists': [list.to_dict() for list in self.lists],
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
             'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
         }
+
+    def member_ids(self):
+        return [user.id for user in self.members]
