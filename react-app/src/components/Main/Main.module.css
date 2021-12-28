@@ -28,6 +28,7 @@
 }
 
 .mainSection {
+    color: #fff;
     margin: 0 auto;
     max-width: 1096px;
     padding: 80px 16px;
@@ -66,7 +67,7 @@
 
 .productShowcaseLarge > div {
     align-items: center;
-    background: lightgray;
+    background: #fff;
     display: flex;
     height: 762px;
     justify-content: center;

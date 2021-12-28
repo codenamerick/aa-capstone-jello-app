@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import style from "./Main.module.css";
 import heroImage from './assets/hero-image.svg';
 
@@ -15,7 +14,7 @@ const Main = () => {
                         <Link to={'/sign-up'} className={style.mainBtn}>Sign up - it's free!</Link>
                     </div>
                     <div className={style.headerImage}>
-                        <img src={heroImage} alt='Hero Image' />
+                        <img src={heroImage} alt='' />
                     </div>
                 </div>
             </header>

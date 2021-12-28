@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import BoardNav from '../Board/BoardNav';
 import CreateBoardFormModal from '../CreateBoardModal';
@@ -13,11 +13,10 @@ const Dashboard = () => {
     const sessionUser = useSelector((state) => (state.session.user));
     const userId = sessionUser.id
     const boards = useSelector((state) => Object.values(state.boards));
-    const board = boards.find(({user_id}) => user_id === +userId)
+    // const board = boards.find(({user_id}) => user_id === +userId);
     const [boardCardId, setBoardCardId] = useState('');
+    const [boardOwnerId, setBoardOwnerId] = useState('');
     const [boardMenuActive, setBoardMenuActive] = useState(false);
-
-    console.log('board ownerrrr----', board);
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
@@ -42,7 +41,7 @@ const Dashboard = () => {
                     </div>
                     <div className={style.cardWrapper}>
                         {boards.map((board) => (
-                            <div key={board.id} className={style.boardCard}>
+                            <div key={board.id} className={style.boardCard} onMouseOver={() => setBoardOwnerId(board.user_id)}>
                                 <div className={style.boardBg} style={{backgroundImage:'url(' + board.image_url + ')'}}></div>
                                 <div className={style.cardOverlay}></div>
                                 <div className={style.boardTitle}>
@@ -50,20 +49,24 @@ const Dashboard = () => {
                                 </div>
                                 <Link to={`/boards/${board.id}`} className={style.boardLink}>
                                 </Link>
-                                <div id={`boardMenuBtn-${board.id}`} className={style.boardMenuBtn} onClick={() => {setBoardCardId(board.id); setBoardMenuActive(true);}}>
-                                    <i className="fas fa-ellipsis-h"></i>
-                                </div>
-                                {boardMenuActive && (
+                                {boardOwnerId === userId && (
                                     <div>
-                                    {boardCardId === board.id && (
-                                        <>
-                                            <div className={style.boardMenuModalBg} onClick={() => setBoardMenuActive(false)}></div>
-                                            <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>
-                                                {editBoardBtn}
-                                                {deleteBoard}
+                                        <div id={`boardMenuBtn-${board.id}`} className={style.boardMenuBtn} onClick={() => {setBoardCardId(board.id); setBoardMenuActive(true);}}>
+                                            <i className="fas fa-ellipsis-h"></i>
+                                        </div>
+                                        {boardMenuActive && (
+                                            <div>
+                                            {boardCardId === board.id && (
+                                                <>
+                                                    <div className={style.boardMenuModalBg} onClick={() => setBoardMenuActive(false)}></div>
+                                                    <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>
+                                                        {editBoardBtn}
+                                                        {deleteBoard}
+                                                    </div>
+                                                </>
+                                            )}
                                             </div>
-                                        </>
-                                    )}
+                                        )}
                                     </div>
                                 )}
                             </div>
