@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { login } from '../../store/session';
-import style from './auth.module.css'
+import style from './auth.module.css';
+import logo from '../Main/assets/jello-logo-main-final.svg';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -18,6 +19,11 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+  };
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(login('demo@aa.io', 'password'));
   };
 
   const updateEmail = (e) => {
@@ -36,7 +42,7 @@ const LoginForm = () => {
     <div className={style.authWrapper}>
       <div>
         <Link to={'/'} className={style.formLogo}>
-          <h2>Logo</h2>
+          <img src={logo} alt='' />
         </Link>
         <form onSubmit={onLogin}>
           <div className={style.formErrors}>
@@ -65,6 +71,7 @@ const LoginForm = () => {
               <p>Don't have an account? Sign up</p>
             </Link>
             <button type='submit' className={style.mainBtn}>Log in</button>
+            <div className={style.demoBtn} onClick={demoLogin}>Demo</div>
           </div>
         </form>
       </div>

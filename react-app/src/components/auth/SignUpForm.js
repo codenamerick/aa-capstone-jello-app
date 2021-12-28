@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import style from './auth.module.css';
+import logo from '../Main/assets/jello-logo-main-final.svg';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -48,7 +49,7 @@ const SignUpForm = () => {
     <div className={style.authWrapper}>
       <div>
         <Link to={'/'} className={style.formLogo}>
-          <h2>Logo</h2>
+          <img src={logo} alt='' />
         </Link>
         <form onSubmit={onSignUp}>
           <div className={style.formErrors}>
