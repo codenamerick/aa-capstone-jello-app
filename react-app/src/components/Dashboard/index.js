@@ -4,6 +4,7 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import BoardNav from '../Board/BoardNav';
 import CreateBoardFormModal from '../CreateBoardModal';
+import DeleteBoardBtn from '../DeleteBoardModal';
 import EditBoardModal from '../EditBoardModal';
 import style from "./Dashboard.module.css";
 
@@ -24,6 +25,10 @@ const Dashboard = () => {
 
     const editBoardBtn = (
         <EditBoardModal boardCardId={boardCardId} setBoardCardId={setBoardCardId} setBoardMenuActive={setBoardMenuActive} boardMenuActive={boardMenuActive}/>
+    );
+
+    const deleteBoard = (
+        <DeleteBoardBtn boardCardId={boardCardId} setBoardCardId={setBoardCardId} setBoardMenuActive={setBoardMenuActive} boardMenuActive={boardMenuActive}/>
     );
 
     return (
@@ -53,7 +58,10 @@ const Dashboard = () => {
                                     {boardCardId === board.id && (
                                         <>
                                             <div className={style.boardMenuModalBg} onClick={() => setBoardMenuActive(false)}></div>
-                                            <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>{editBoardBtn}</div>
+                                            <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>
+                                                {editBoardBtn}
+                                                {deleteBoard}
+                                            </div>
                                         </>
                                     )}
                                     </div>

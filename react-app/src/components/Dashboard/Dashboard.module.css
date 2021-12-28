@@ -107,9 +107,8 @@
 }
 
 .boardMenuWrapper {
-    background: #3d3d40;
     border-radius: 4px;
-    padding: 16px;
+    overflow: hidden;
     position: absolute;
     right: 6px;
     top: 6px;

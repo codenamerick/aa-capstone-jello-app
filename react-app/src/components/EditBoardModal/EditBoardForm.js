@@ -57,8 +57,9 @@ const EditBoardForm = ({setShowMainModal, boardCardId, setBoardMenuActive}) => {
                         <div key={ind}>{error}</div>
                         ))}
                     </div>
+                    <p className={style.modalHeading}>Edit Board</p>
                     <div className={style.inputWrapper}>
-                        <label htmlFor='name'>Edit Board Name</label>
+                        <label htmlFor='name'>Board Name</label>
                         <input
                         name='name'
                         type='text'

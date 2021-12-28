@@ -60,6 +60,7 @@ const CreateBoardForm = ({setShowMainModal}) => {
                         <div key={ind}>{error}</div>
                         ))}
                     </div>
+                    <p className={style.modalHeading}>Create Board</p>
                     <div className={style.inputWrapper}>
                         <label htmlFor='name'>Board Name</label>
                         <input

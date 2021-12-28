@@ -2,6 +2,7 @@
 const GET_BOARDS = 'boards/GET_BOARDS';
 const CREATE_BOARD = 'boards/CREATE_BOARD';
 const EDIT_BOARD = 'boards/EDIT_BOARD';
+const DELETE_BOARD = 'boards/DELETE_BOARD';
 
 // Board actions
 const getBoards = (boards) => ({
@@ -17,6 +18,11 @@ const createBoard = (board) => ({
 const editBoard = (board) => ({
     type: EDIT_BOARD,
     board
+});
+
+const deleteBoard = (boardId) => ({
+    type: DELETE_BOARD,
+    boardId
 });
 
 // Board Thunks
@@ -55,6 +61,17 @@ export const editBoardThunk = (board) => async(dispatch) => {
     return data;
 };
 
+export const deleteBoardThunk = (boardId) => async(dispatch) => {
+    const res = await fetch(`/api/boards/${boardId}`, {
+        method: 'DELETE',
+    });
+
+    const data = await res.json();
+    dispatch(deleteBoard(data.id));
+
+    return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -71,6 +88,11 @@ export default function boardReducer(state = {}, action) {
             return {...state, [action.board.id]: action.board};
         case EDIT_BOARD:
             return {...state, [action.board.id]: action.board};
+        case DELETE_BOARD:
+            newState = {...state};
+            delete newState[action.boardId];
+            
+            return newState;
         case 'logout':
             newState = {};
             return newState;

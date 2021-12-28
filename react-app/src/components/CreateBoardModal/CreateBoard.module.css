@@ -39,7 +39,7 @@
     flex-direction: column;
     margin: 0 auto;
     max-width: 400px;
-    padding: 30px 16px;
+    padding: 38px 16px;
 }
 
 .inputWrapper {
@@ -101,4 +101,30 @@
 .formErrors div {
     color: #E71E23;
     margin-bottom: 16px;
+}
+
+/* delete board */
+.deleteBoardModal > p, .modalHeading {
+    color: #fff;
+    font-size: 20px;
+    margin: 0 auto 30px;
+    max-width: 249px;
+    text-align: center;
+}
+
+.deleteBoardModal .mainBtn:hover {
+    background: #E71E23;
+}
+
+/* board menu btns */
+.boardMenuBtn {
+    background: #3d3d40;
+    padding: 8px 16px;
+    transition: all 200ms;
+}
+
+.boardMenuBtn:hover {
+    background: #fff;
+    color: #000;
+    cursor: pointer;
 }

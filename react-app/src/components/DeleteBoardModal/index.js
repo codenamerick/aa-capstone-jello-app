@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import { MainModal } from "../../context/MainModal";
 import style from '../CreateBoardModal/CreateBoard.module.css';
-import EditBoardForm from "./EditBoardForm";
+import DeleteBoardModal from "./DeleteBoardModal";
 
-const EditBoardModal = ({boardCardId, setBoardMenuActive, setBoardCardId}) => {
+const DeleteBoardBtn = ({boardCardId, setBoardMenuActive, setBoardCardId}) => {
     const [showMainModal, setShowMainModal] = useState(false);
 
     const handleOpen = async () => {
@@ -12,10 +12,10 @@ const EditBoardModal = ({boardCardId, setBoardMenuActive, setBoardCardId}) => {
 
     return (
         <>
-            <div onClick={handleOpen} className={style.boardMenuBtn}>Edit Board</div>
+            <div onClick={handleOpen} className={style.boardMenuBtn}>Delete Board</div>
             {showMainModal && (
                 <MainModal onClose={() => {setShowMainModal(false); setBoardMenuActive(false)}}>
-                    <EditBoardForm setShowMainModal={setShowMainModal} boardCardId={boardCardId} setBoardMenuActive={setBoardMenuActive}/>
+                    <DeleteBoardModal setShowMainModal={setShowMainModal} boardCardId={boardCardId} setBoardMenuActive={setBoardMenuActive}/>
                 </MainModal>
             )}
         </>
@@ -23,4 +23,4 @@ const EditBoardModal = ({boardCardId, setBoardMenuActive, setBoardCardId}) => {
 };
 
 
-export default EditBoardModal;
+export default DeleteBoardBtn;
