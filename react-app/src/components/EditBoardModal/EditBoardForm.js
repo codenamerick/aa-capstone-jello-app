@@ -1,20 +1,16 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory} from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import style from '../CreateBoardModal/CreateBoard.module.css';
 
 const EditBoardForm = ({setShowMainModal, boardCardId, setBoardMenuActive}) => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const sessionUser = useSelector(state => state.session);
     const boards = useSelector((state) => Object.values(state.boards));
     const board = boards.find(({id}) => id === +boardCardId)
     const user_id = sessionUser['user'].id
-    const [name, setName] = useState('');
+    const [name, setName] = useState(board.name);
     const [errors, setErrors] = useState([]);
-
-    console.log('CURRENT BOARD---: ', board)
 
     const validate = () => {
         const validationErrors = [];
@@ -39,12 +35,12 @@ const EditBoardForm = ({setShowMainModal, boardCardId, setBoardMenuActive}) => {
 
         formData.append('name', name);
         formData.append('user_id', user_id);
+        formData.append('id', board.id)
 
-        // const newBoard = await dispatch(boardActions.createBoardThunk(formData));
+        await dispatch(boardActions.editBoardThunk(formData));
 
         setShowMainModal(false);
         setBoardMenuActive(false);
-        // history.push(`/boards/${newBoard.id}`)
     };
 
     const handleClose = () => {
@@ -66,7 +62,7 @@ const EditBoardForm = ({setShowMainModal, boardCardId, setBoardMenuActive}) => {
                         <input
                         name='name'
                         type='text'
-                        value={board.name}
+                        value={name}
                         onChange={(e) => setName(e.target.value)} required
                         />
                     </div>

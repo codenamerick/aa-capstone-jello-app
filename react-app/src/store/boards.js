@@ -1,6 +1,7 @@
 // Board consts
 const GET_BOARDS = 'boards/GET_BOARDS';
 const CREATE_BOARD = 'boards/CREATE_BOARD';
+const EDIT_BOARD = 'boards/EDIT_BOARD';
 
 // Board actions
 const getBoards = (boards) => ({
@@ -10,6 +11,11 @@ const getBoards = (boards) => ({
 
 const createBoard = (board) => ({
     type: CREATE_BOARD,
+    board
+});
+
+const editBoard = (board) => ({
+    type: EDIT_BOARD,
     board
 });
 
@@ -33,7 +39,21 @@ export const createBoardThunk = (board) => async(dispatch) => {
     dispatch(createBoard(data));
 
     return data;
-}
+};
+
+export const editBoardThunk = (board) => async(dispatch) => {
+    const boardId = board.get('id');
+    const res = await fetch(`/api/boards/${boardId}`, {
+        method: 'PUT',
+        body: board
+    });
+
+
+    const data = await res.json();
+    dispatch(editBoard(data));
+
+    return data;
+};
 
 // Boards reducer
 export default function boardReducer(state = {}, action) {
@@ -48,6 +68,8 @@ export default function boardReducer(state = {}, action) {
 
             return newState;
         case CREATE_BOARD:
+            return {...state, [action.board.id]: action.board};
+        case EDIT_BOARD:
             return {...state, [action.board.id]: action.board};
         case 'logout':
             newState = {};

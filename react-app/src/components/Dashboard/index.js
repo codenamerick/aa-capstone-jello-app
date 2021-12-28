@@ -12,8 +12,11 @@ const Dashboard = () => {
     const sessionUser = useSelector((state) => (state.session.user));
     const userId = sessionUser.id
     const boards = useSelector((state) => Object.values(state.boards));
+    const board = boards.find(({user_id}) => user_id === +userId)
     const [boardCardId, setBoardCardId] = useState('');
     const [boardMenuActive, setBoardMenuActive] = useState(false);
+
+    console.log('board ownerrrr----', board);
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
