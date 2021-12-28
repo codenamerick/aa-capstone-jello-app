@@ -27,6 +27,10 @@
     font-weight: 400;
 }
 
+.heroWrapper img {
+    width: 100%;
+}
+
 .mainSection {
     color: #fff;
     margin: 0 auto;
@@ -58,7 +62,7 @@
 
 .headerContent {
     margin-right: 16px;
-    max-width: 629px;
+    max-width: 64%;
 }
 
 .productShowcaseLarge {

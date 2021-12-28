@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CreateBoardMainBtn from '../CreateBoardModal/CreateBoardMainBtn';
 import style from "./Board.module.css";
+import logo from '../../components/Main/assets/jello-logo-main-final.svg';
 
 const BoardNav = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -16,7 +17,7 @@ const BoardNav = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} className={style.navLogo}>
-              LOGO
+              <img src={logo} alt='' />
             </NavLink>
           </li>
           <li>

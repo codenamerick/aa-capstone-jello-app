@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import style from "./navbar.module.css";
+import logo from '../components/Main/assets/jello-logo-main-final.svg';
 
 const NavBar = () => {
   return (
@@ -10,7 +10,7 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
-              LOGO
+              <img src={logo} alt='' />
             </NavLink>
           </li>
         </ul>
