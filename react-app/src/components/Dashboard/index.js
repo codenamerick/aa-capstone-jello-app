@@ -4,6 +4,7 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import BoardNav from '../Board/BoardNav';
 import CreateBoardFormModal from '../CreateBoardModal';
+import EditBoardModal from '../EditBoardModal';
 import style from "./Dashboard.module.css";
 
 const Dashboard = () => {
@@ -12,10 +13,15 @@ const Dashboard = () => {
     const userId = sessionUser.id
     const boards = useSelector((state) => Object.values(state.boards));
     const [boardCardId, setBoardCardId] = useState('');
+    const [boardMenuActive, setBoardMenuActive] = useState(false);
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
     }, [dispatch])
+
+    const editBoardBtn = (
+        <EditBoardModal boardCardId={boardCardId} setBoardCardId={setBoardCardId} setBoardMenuActive={setBoardMenuActive} boardMenuActive={boardMenuActive}/>
+    );
 
     return (
         <>
@@ -36,14 +42,18 @@ const Dashboard = () => {
                                 </div>
                                 <Link to={`/boards/${board.id}`} className={style.boardLink}>
                                 </Link>
-                                <div id={`boardMenuBtn-${board.id}`} className={style.boardMenuBtn} onClick={() => setBoardCardId(board.id)}>
+                                <div id={`boardMenuBtn-${board.id}`} className={style.boardMenuBtn} onClick={() => {setBoardCardId(board.id); setBoardMenuActive(true);}}>
                                     <i className="fas fa-ellipsis-h"></i>
                                 </div>
-                                {boardCardId === board.id && (
-                                    <>
-                                        <div className={style.boardMenuModalBg} onClick={() => setBoardCardId('')}></div>
-                                        <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>menu links</div>
-                                    </>
+                                {boardMenuActive && (
+                                    <div>
+                                    {boardCardId === board.id && (
+                                        <>
+                                            <div className={style.boardMenuModalBg} onClick={() => setBoardMenuActive(false)}></div>
+                                            <div id={`board-menu-${board.id}`} className={style.boardMenuWrapper}>{editBoardBtn}</div>
+                                        </>
+                                    )}
+                                    </div>
                                 )}
                             </div>
                         ))}
