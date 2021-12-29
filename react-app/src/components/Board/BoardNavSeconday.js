@@ -6,6 +6,7 @@ import LogoutButton from '../auth/LogoutButton';
 import CreateBoardMainBtn from '../CreateBoardModal/CreateBoardMainBtn';
 import style from "./Board.module.css";
 import logo from '../../components/Main/assets/jello-logo-main-final.svg';
+import CreateListFormModal from '../CreateListModal';
 
 const BoardNavSeconday = () => {
     const sessionUser = useSelector(state => state.session.user);
@@ -29,7 +30,7 @@ const BoardNavSeconday = () => {
                 <ul>
                     <li className={style.secondaryBtn}>
                         <div>
-                            Create New List
+                            <CreateListFormModal />
                         </div>
                     </li>
                 </ul>
