@@ -32,12 +32,12 @@ const Main = () => {
                 <div>
                     <p>Crafted By:</p>
                     <div className={style.iconWrapper}>
-                        <Link to='https://github.com/codenamerick' target='_blank' className={style.socialLink}>
+                        <a href='https://github.com/codenamerick' target='_blank' className={style.socialLink}>
                             <i class="fab fa-github-square"></i>
-                        </Link>
-                        <Link to='https://www.linkedin.com/in/rick-arocho/' target='_blank' className={style.socialLink}>
+                        </a>
+                        <a href='https://www.linkedin.com/in/rick-arocho/' target='_blank' className={style.socialLink}>
                             <i class="fab fa-linkedin"></i>
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </footer>
