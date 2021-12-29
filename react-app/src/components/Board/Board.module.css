@@ -71,13 +71,19 @@
 
 /* board canvas */
 .boardCanvas {
-    background: cornflowerblue;
+    display: flex;
+    gap: 10px;
     height: 100vh;
-    padding-top: 100px;
+    overflow-x: scroll;
+    padding: 100px 0 32px 16px;
 }
 
 .listWrapper {
-    background: crimson;
+    background: #3D3D40;
+    border-radius: 4px;
+    color: #fff;
     max-height: 100%;
+    padding: 10px;
     overflow-y: scroll;
+    width: 272px;
 }
