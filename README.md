@@ -1,6 +1,8 @@
 # Jello
 [Jello](https://jello-io.herokuapp.com/) is a Trello clone developed by a promising App Academy student. 
 
+<img src='https://res.cloudinary.com/dedpxzbak/image/upload/v1640805060/Jello-io_n3agu1.png'>
+
 ## Getting started
 
 1. Clone this repository (only this branch)
