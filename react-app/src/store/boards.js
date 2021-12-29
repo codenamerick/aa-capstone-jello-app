@@ -4,6 +4,9 @@ const CREATE_BOARD = 'boards/CREATE_BOARD';
 const EDIT_BOARD = 'boards/EDIT_BOARD';
 const DELETE_BOARD = 'boards/DELETE_BOARD';
 
+// List consts
+const CREATE_LIST = 'boards/CREATE_LIST';
+
 // Board actions
 const getBoards = (boards) => ({
     type: GET_BOARDS,
@@ -23,6 +26,11 @@ const editBoard = (board) => ({
 const deleteBoard = (boardId) => ({
     type: DELETE_BOARD,
     boardId
+});
+
+const createList = (board) => ({
+    type: CREATE_LIST,
+    board
 });
 
 // Board Thunks
@@ -72,6 +80,20 @@ export const deleteBoardThunk = (boardId) => async(dispatch) => {
     return data;
 };
 
+export const createListThunk = (board) => async(dispatch) => {
+    const boardId = board.get('board_id')
+    const res = await fetch(`/api/boards/${boardId}/lists`, {
+        method: 'POST',
+        body: board
+    });
+
+    console.log('list in THUNK---: ', res)
+    const data = await res.json();
+    dispatch(createList(data));
+
+    return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -91,8 +113,11 @@ export default function boardReducer(state = {}, action) {
         case DELETE_BOARD:
             newState = {...state};
             delete newState[action.boardId];
-            
+
             return newState;
+        case CREATE_LIST:
+            console.log('CREATE LIST SLICE---: ', action)
+            return {...state, [action.board.id]: action.board};
         case 'logout':
             newState = {};
             return newState;
