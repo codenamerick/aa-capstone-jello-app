@@ -23,13 +23,14 @@ def new_list(boardId):
     print('BOARD ID-------: ', boardId)
     board = Board.query.get(int(boardId))
     print('BOARD MEMBERS-------: ', board.members)
+    print('CURRENT USER-----: ', current_user)
     form = NewListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if current_user.id in board.members:
+    if current_user in board.members:
         print('MADE IT TO BOARD MEMBERS')
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and current_user in board.members:
         list = List(
             name=form.data['name'],
             user_id=current_user.id,

@@ -33,10 +33,10 @@ const Main = () => {
                     <p>Crafted By:</p>
                     <div className={style.iconWrapper}>
                         <a href='https://github.com/codenamerick' target='_blank' className={style.socialLink}>
-                            <i class="fab fa-github-square"></i>
+                            <i className="fab fa-github-square"></i>
                         </a>
                         <a href='https://www.linkedin.com/in/rick-arocho/' target='_blank' className={style.socialLink}>
-                            <i class="fab fa-linkedin"></i>
+                            <i className="fab fa-linkedin"></i>
                         </a>
                     </div>
                 </div>

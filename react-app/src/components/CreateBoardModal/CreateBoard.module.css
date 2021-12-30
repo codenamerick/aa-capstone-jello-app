@@ -118,9 +118,11 @@
 
 /* board menu btns */
 .boardMenuBtn {
-    background: #3d3d40;
+    /* background: #3d3d40; */
+    background: #000;
     padding: 8px 16px;
     transition: all 200ms;
+    white-space: nowrap;
 }
 
 .boardMenuBtn:hover {
