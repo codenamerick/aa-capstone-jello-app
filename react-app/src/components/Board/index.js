@@ -6,6 +6,7 @@ import style from "./Board.module.css";
 import BoardNav from './BoardNav';
 import BoardNavSeconday from './BoardNavSeconday';
 import EditListModal from '../EditListModal';
+import DeleteListBtn from '../DeleteListModal';
 
 const Board = () => {
     const {boardId} = useParams();
@@ -19,12 +20,12 @@ const Board = () => {
     }, [dispatch])
 
     const editListBtn = (
-        <EditListModal setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId}/>
+        <EditListModal setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
 
-    // const deleteListBtn = (
-    //     <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} />
-    // );
+    const deleteListBtn = (
+        <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
+    );
 
     return (
         <div className={style.boardWrapper}>
@@ -46,7 +47,7 @@ const Board = () => {
                                                 <div className={style.listMenuModalBg} onClick={() => setListMenuActive(false)}></div>
                                                 <div id={`list-menu-${list.id}`} className={style.listMenuWrapper}>
                                                     {editListBtn}
-                                                    {/* {deleteListBtn} */}
+                                                    {deleteListBtn}
                                                 </div>
                                             </>
                                         )}
