@@ -1,20 +1,20 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import * as boardActions from '../../store/boards';
 import style from '../CreateBoardModal/CreateBoard.module.css';
 
-const CreateListForm = ({setShowMainModal}) => {
+const EditListForm = ({setShowMainModal, listId, setListMenuActive}) => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session);
+    const boards = useSelector((state) => Object.values(state.boards));
+    const board = boards.find(({id}) => id === +boardId);
+    const lists = board.lists;
+    const list = lists.find(({id}) => id === +listId);
     const user_id = sessionUser['user'].id
-    const [name, setName] = useState('');
+    const [name, setName] = useState(list.name);
     const [errors, setErrors] = useState([]);
-
-    const reset = () => {
-        setName('');
-    };
 
     const validate = () => {
         const validationErrors = [];
@@ -40,15 +40,17 @@ const CreateListForm = ({setShowMainModal}) => {
         formData.append('name', name);
         formData.append('user_id', user_id);
         formData.append('board_id', boardId);
+        formData.append('id', listId);
 
-        await dispatch(boardActions.createListThunk(formData));
+        await dispatch(boardActions.editListThunk(formData));
 
-        reset();
         setShowMainModal(false);
+        setListMenuActive(false);
     };
 
     const handleClose = () => {
         setShowMainModal(false);
+        setListMenuActive(false);
     };
 
     return (
@@ -60,7 +62,7 @@ const CreateListForm = ({setShowMainModal}) => {
                         <div key={ind}>{error}</div>
                         ))}
                     </div>
-                    <p className={style.modalHeading}>Create List</p>
+                    <p className={style.modalHeading}>Edit List</p>
                     <div className={style.inputWrapper}>
                         <label htmlFor='name'>List Name</label>
                         <input
@@ -71,7 +73,7 @@ const CreateListForm = ({setShowMainModal}) => {
                         />
                     </div>
                     <div className={style.inputWrapper}>
-                        <button type='submit' className={style.mainBtn}>Create List</button>
+                        <button type='submit' className={style.mainBtn}>Save</button>
                         <p onClick={handleClose}>Cancel</p>
                     </div>
                 </form>
@@ -81,4 +83,4 @@ const CreateListForm = ({setShowMainModal}) => {
 };
 
 
-export default CreateListForm;
+export default EditListForm;

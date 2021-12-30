@@ -102,3 +102,48 @@
     overflow-y: scroll;
     width: 272px;
 }
+
+.listHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px;
+}
+
+.listHeader > p {
+    font-weight: 500;
+}
+
+.listHeader > div {
+    position: relative;
+}
+
+/* list menus */
+.listMenuBtn {
+    transition: all 200ms;
+}
+
+.listMenuBtn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/* board canvas modals */
+.listMenuModalBg {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 12;
+}
+
+.listMenuWrapper {
+    background: black;
+    border-radius: 4px;
+    overflow: hidden;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    z-index: 13;
+}
