@@ -1,0 +1,12 @@
+.CardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.CardsContainer p {
+    background: #535355;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px;
+}

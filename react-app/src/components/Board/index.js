@@ -7,6 +7,7 @@ import BoardNav from './BoardNav';
 import BoardNavSeconday from './BoardNavSeconday';
 import EditListModal from '../EditListModal';
 import DeleteListBtn from '../DeleteListModal';
+import CardsContainer from '../CardsContainer';
 
 const Board = () => {
     const {boardId} = useParams();
@@ -55,8 +56,11 @@ const Board = () => {
                                 )}
                             </div>
                         </div>
+                        <div className={style.cardsComponentWrapper}>
+                            <CardsContainer />
+                        </div>
                         <div>
-                            card
+                            <p>Add Card +</p>
                         </div>
                     </div>
                 ))}
