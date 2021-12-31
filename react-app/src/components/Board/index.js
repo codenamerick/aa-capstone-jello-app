@@ -57,7 +57,7 @@ const Board = () => {
                             </div>
                         </div>
                         <div className={style.cardsComponentWrapper}>
-                            <CardsContainer />
+                            <CardsContainer list={list}/>
                         </div>
                         <div>
                             <p>Add Card +</p>
