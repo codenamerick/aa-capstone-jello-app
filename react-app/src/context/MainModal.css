@@ -21,10 +21,9 @@
 }
 
 #main-modal-content {
+    padding: 16px;
     position: absolute;
-    background: #18181B;
     border-radius: 4px;
-    max-width: 325px;
     width: 100%;
     z-index: 21;
 }

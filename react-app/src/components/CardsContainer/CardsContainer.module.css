@@ -10,3 +10,56 @@
     color: #fff;
     padding: 10px 8px;
 }
+
+.card:hover {
+    background: #303031;
+    cursor: pointer;
+}
+
+.cardDetailsWrapper {
+    background: #3D3D40;
+    border-radius: 4px;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 768px;
+    padding: 26px;
+    width: 100%;
+}
+
+.cardHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.cardNameWrapper, .cardDescriptionWrapper {
+    align-items: center;
+    display: flex;
+}
+
+.closeIcon i {
+    transition: all 200ms;
+}
+
+.closeIcon i:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.cardNameWrapper i, .cardDescriptionWrapper svg {
+    margin-right: 16px;
+}
+
+.cardNameWrapper h2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cardDescriptionWrapper h3 {
+    font-size: 17px;
+}
+
+.descriptionContent {
+    padding: 24px 0 16px 32px;
+}
