@@ -39,6 +39,7 @@
     margin: 0 auto;
     max-width: 400px;
     padding: 38px 16px;
+    width: 100vw;
 }
 
 .inputWrapper {

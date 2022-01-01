@@ -28,7 +28,7 @@ const BoardNavSeconday = () => {
                     </li>
                 </ul>
                 <ul>
-                    <li className={style.secondaryBtn}>
+                    <li>
                         <div>
                             <CreateListFormModal />
                         </div>

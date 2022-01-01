@@ -1,18 +1,9 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
-import * as boardActions from '../../store/boards';
+import React from "react";
 import style from './CardsContainer.module.css';
 
-const CardDetails = ({setShowMainModal, list}) => {
-    // const {boardId} = useParams();
-    // const dispatch = useDispatch();
-    // const sessionUser = useSelector(state => state.session);
-    // const user_id = sessionUser['user'].id
-    // const [name, setName] = useState('');
-    // const [errors, setErrors] = useState([]);
-
-    console.log('LIST FROM CARD DETAILS----: ', list)
+const CardDetails = ({setShowMainModal, list, cardId}) => {
+    const cardIndex = list.cards.findIndex((card) => card.id === cardId);
+    const selectedCard = list.cards[cardIndex];
 
     const paragraphIcon = (
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +20,7 @@ const CardDetails = ({setShowMainModal, list}) => {
             <div className={style.cardHeader}>
                 <div className={style.cardNameWrapper}>
                     <i className="fas fa-window-maximize"></i>
-                    <h2>Card Name</h2>
+                    <h2>{selectedCard.name}</h2>
                 </div>
                 <div className={style.closeIcon} onClick={() => setShowMainModal(false)}>
                     <i className="fas fa-times"></i>
@@ -41,7 +32,7 @@ const CardDetails = ({setShowMainModal, list}) => {
                     <h3>Description</h3>
                 </div>
                 <div className={style.descriptionContent}>
-                    <p>Description content.</p>
+                    <p>{selectedCard.description ? selectedCard.description:'Add a more detailed description...'}</p>
                 </div>
             </div>
         </div>

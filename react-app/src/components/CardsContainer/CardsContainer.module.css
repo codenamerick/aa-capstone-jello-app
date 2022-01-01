@@ -23,7 +23,7 @@
     margin: 0 auto;
     max-width: 768px;
     padding: 26px;
-    width: 100%;
+    width: 100vw;
 }
 
 .cardHeader {
