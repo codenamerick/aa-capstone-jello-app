@@ -62,9 +62,10 @@ const editCard = (list) => ({
     list
 });
 
-const deleteCard = (list) => ({
+const deleteCard = (list, cardId) => ({
     type: DELETE_CARD,
-    list
+    list,
+    cardId
 });
 
 // Board Thunks
@@ -168,6 +169,18 @@ export const createCardThunk = (list) => async(dispatch) => {
     return data;
 };
 
+export const deleteCardThunk = (list, cardId) => async(dispatch) => {
+    const {board_id, id} = list
+    const res = await fetch(`/api/boards/${board_id}/lists/${id}/cards/${cardId}`, {
+        method: 'DELETE',
+    });
+
+    const data = await res.json();
+    dispatch(deleteCard(data, cardId));
+
+    return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -202,13 +215,22 @@ export default function boardReducer(state = {}, action) {
             newState = {...state};
             const deleteIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists.splice(deleteIndex, 1);
-            newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice()
+            newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice();
 
             return newState;
         case CREATE_CARD:
             newState = {...state};
             const cardListIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists[cardListIndex] = action.list;
+
+            return newState;
+        case DELETE_CARD:
+            newState = {...state};
+            const deleteCardListIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
+            const cardsList = newState[action.list.board_id].lists[deleteCardListIndex].cards;
+            const deleteCardIndex = cardsList.findIndex((card) => card.id === action.cardId);
+            newState[action.list.board_id].lists[deleteCardListIndex].cards.splice(deleteCardIndex, 1);
+            newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice();
 
             return newState;
         case 'logout':
