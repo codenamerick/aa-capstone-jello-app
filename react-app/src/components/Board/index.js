@@ -8,6 +8,7 @@ import BoardNavSeconday from './BoardNavSeconday';
 import EditListModal from '../EditListModal';
 import DeleteListBtn from '../DeleteListModal';
 import CardsContainer from '../CardsContainer';
+import AddCardBtn from '../AddCard';
 
 const Board = () => {
     const {boardId} = useParams();
@@ -60,7 +61,7 @@ const Board = () => {
                             <CardsContainer list={list}/>
                         </div>
                         <div>
-                            <p>Add Card +</p>
+                            <AddCardBtn />
                         </div>
                     </div>
                 ))}
