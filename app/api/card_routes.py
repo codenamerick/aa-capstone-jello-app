@@ -33,7 +33,7 @@ def new_card(boardId, listId):
 
 
 @card_routes.route('/<int:boardId>/lists/<int:listId>/cards/<int:cardId>', methods=['PUT'])
-# @login_required
+@login_required
 def edit_card(boardId, listId, cardId):
     board = Board.query.get(int(boardId))
     list = List.query.get(int(listId))

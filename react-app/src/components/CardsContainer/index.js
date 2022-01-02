@@ -16,8 +16,8 @@ const CardsContainer = ({list}) => {
     return (
         <div className={style.CardsContainer}>
             {list.cards?.map((card) => (
-                <div key={card.id} className={style.card}>
-                    <div onClick={() => {setShowMainModal(true); setCardId(card.id);}}>
+                <div key={card.id} className={style.card} onClick={() => {setShowMainModal(true); setCardId(card.id);}}>
+                    <div>
                         <p>{card.name}</p>
                     </div>
                     <div className={style.trashIconWrapper} onMouseOver={() => setCardId(card.id)} onClick={deleteCard}>

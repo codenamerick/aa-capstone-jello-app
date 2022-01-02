@@ -19,6 +19,7 @@ const Board = () => {
     const [listMenuActive, setListMenuActive] = useState(false);
     const [addCardActive, setAddCardActive] = useState(false);
     const [listIdOnCard, setListIdOnCard] = useState('');
+    const currentBoard = useSelector((state) => state.boards?.[boardId]);
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
@@ -35,7 +36,7 @@ const Board = () => {
     return (
         <div className={style.boardWrapper}>
             <BoardNav />
-            <BoardNavSeconday />
+            <BoardNavSeconday currentBoard={currentBoard} />
             <div className={style.boardCanvas}>
                 {lists?.map((list) => (
                     <div key={list.id} className={style.listWrapper}>

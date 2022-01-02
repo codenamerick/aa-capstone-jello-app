@@ -32,7 +32,7 @@
     color: #000;
 }
 
-.mainBtn, .secondaryBtn {
+.mainBtn, .secondaryBtn, .boardNameWrapper {
     background: #fff;
     border-radius: 4px;
     color: #000;
@@ -67,10 +67,14 @@
 }
 
 /* secondary board nav */
-.secondaryBtn {
+.secondaryBtn, .boardNameWrapper {
     background: #3D3D40;
     color: #fff;
     margin-left: 4px;
+}
+
+.boardNameWrapper {
+    margin-left: 0;
 }
 
 .secondaryBtn:hover {
