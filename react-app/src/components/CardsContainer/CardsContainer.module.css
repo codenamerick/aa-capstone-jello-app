@@ -52,6 +52,10 @@
     margin-bottom: 24px;
 }
 
+.cardNameWrapper {
+    width: 95%;
+}
+
 .cardNameWrapper, .cardDescriptionWrapper {
     align-items: center;
     display: flex;
@@ -67,12 +71,17 @@
 }
 
 .cardNameWrapper i, .cardDescriptionWrapper svg {
-    margin-right: 16px;
+    margin-right: 8px;
 }
 
 .cardNameWrapper h2 {
     font-size: 20px;
     font-weight: 500;
+    padding: 5px;
+}
+
+.cardNameWrapper h2:hover {
+    cursor: pointer;
 }
 
 .cardDescriptionWrapper h3 {

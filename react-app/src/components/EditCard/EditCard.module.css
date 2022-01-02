@@ -1,0 +1,17 @@
+
+.editCardForm {
+    width: 95%;
+}
+
+.inputWrapper input {
+    background: #000;
+    border: 1px solid #9150FB;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    outline: none;
+    padding: 4px;
+    transition: all 200ms;
+    width: 100%;
+}

@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
+import EditCardNameForm from "../EditCard/EditCardNameForm";
 import style from './CardsContainer.module.css';
 
 const CardDetails = ({setShowMainModal, list, cardId}) => {
     const cardIndex = list.cards.findIndex((card) => card.id === cardId);
     const selectedCard = list.cards[cardIndex];
+    const [editCardName, setEditCardName] = useState(false);
 
     const paragraphIcon = (
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +22,7 @@ const CardDetails = ({setShowMainModal, list, cardId}) => {
             <div className={style.cardHeader}>
                 <div className={style.cardNameWrapper}>
                     <i className="fas fa-window-maximize"></i>
-                    <h2>{selectedCard.name}</h2>
+                    {editCardName ? <EditCardNameForm selectedCard={selectedCard} setEditCardName={setEditCardName} /> : <h2 onClick={() => setEditCardName(true)}>{selectedCard.name}</h2>}
                 </div>
                 <div className={style.closeIcon} onClick={() => setShowMainModal(false)}>
                     <i className="fas fa-times"></i>
