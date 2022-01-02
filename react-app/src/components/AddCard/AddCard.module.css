@@ -22,3 +22,50 @@
     color: #fff;
     cursor: pointer;
 }
+
+.createCardForm input {
+    background: #535355;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+.createCardForm input:focus {
+    border: none;
+    outline: none;
+}
+
+.btnWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.mainBtn {
+    background: #fff;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    padding: 8px 14px;
+    transition: all 200ms;
+}
+
+.mainBtn:hover {
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.closBtn i {
+    transition: all 200ms;
+}
+
+.closBtn i:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}

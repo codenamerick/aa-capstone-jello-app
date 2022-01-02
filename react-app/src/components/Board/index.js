@@ -9,6 +9,7 @@ import EditListModal from '../EditListModal';
 import DeleteListBtn from '../DeleteListModal';
 import CardsContainer from '../CardsContainer';
 import AddCardBtn from '../AddCard';
+import CreateCardForm from '../AddCard/CreateCardForm';
 
 const Board = () => {
     const {boardId} = useParams();
@@ -62,6 +63,7 @@ const Board = () => {
                         </div>
                         <div>
                             <AddCardBtn />
+                            <CreateCardForm />
                         </div>
                     </div>
                 ))}
