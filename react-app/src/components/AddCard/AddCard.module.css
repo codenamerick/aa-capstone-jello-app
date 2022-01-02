@@ -24,8 +24,8 @@
 }
 
 .createCardForm input {
-    background: #535355;
-    border: none;
+    background: #000;
+    border: 1px solid #9150FB;
     border-radius: 4px;
     color: #fff;
     font-size: 16px;
@@ -35,7 +35,7 @@
 }
 
 .createCardForm input:focus {
-    border: none;
+    border: 1px solid #9150FB;
     outline: none;
 }
 

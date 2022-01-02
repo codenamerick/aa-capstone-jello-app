@@ -1,9 +1,9 @@
 
-.editCardForm {
+.editCardForm, .editCardDescriptionForm {
     width: 95%;
 }
 
-.inputWrapper input {
+.inputWrapper input, .inputWrapper textarea {
     background: #000;
     border: 1px solid #9150FB;
     border-radius: 4px;
@@ -13,5 +13,16 @@
     outline: none;
     padding: 4px;
     transition: all 200ms;
+    width: 100%;
+}
+
+.inputWrapper textarea {
+    font-size: 16px;
+    font-weight: 400;
+    height: 48px;
+    max-height: 150px;
+    min-height: 48px;
+    max-width: 100%;
+    min-width: 100%;
     width: 100%;
 }

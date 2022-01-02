@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import EditCardDescriptionForm from "../EditCard/EditCardDescriptionForm";
 import EditCardNameForm from "../EditCard/EditCardNameForm";
 import style from './CardsContainer.module.css';
 
@@ -6,6 +7,7 @@ const CardDetails = ({setShowMainModal, list, cardId}) => {
     const cardIndex = list.cards.findIndex((card) => card.id === cardId);
     const selectedCard = list.cards[cardIndex];
     const [editCardName, setEditCardName] = useState(false);
+    const [editCardDescription, setEditCardDescription] = useState(false);
 
     const paragraphIcon = (
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +36,7 @@ const CardDetails = ({setShowMainModal, list, cardId}) => {
                     <h3>Description</h3>
                 </div>
                 <div className={style.descriptionContent}>
-                    <p>{selectedCard.description ? selectedCard.description:'Add a more detailed description...'}</p>
+                    {editCardDescription ? <EditCardDescriptionForm selectedCard={selectedCard} setEditCardDescription={setEditCardDescription} /> : <p onClick={() => setEditCardDescription(true)}>{selectedCard.description ? selectedCard.description:'Add a more detailed description...'}</p>}
                 </div>
             </div>
         </div>

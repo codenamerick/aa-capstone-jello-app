@@ -4,18 +4,18 @@ import { useParams } from "react-router-dom";
 import * as boardActions from '../../store/boards';
 import style from './EditCard.module.css';
 
-const EditCardNameForm = ({setEditCardName, selectedCard}) => {
+const EditCardDescriptionForm = ({setEditCardDescription, selectedCard}) => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session);
     const user_id = sessionUser['user'].id;
-    const [name, setName] = useState(selectedCard.name);
+    const [description, setDescription] = useState(selectedCard.description);
     const [errors, setErrors] = useState([]);
 
     const validate = () => {
         const validationErrors = [];
 
-        if (name.length > 50) {
+        if (selectedCard.name.length > 50) {
             validationErrors.push('name: Card name should be less than 50 characters.')
         }
 
@@ -33,7 +33,7 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
 
         const formData = new FormData();
 
-        formData.append('name', name);
+        formData.append('name', selectedCard.name);
         formData.append('user_id', user_id);
         // formData.append('list_id', cardListId);
         formData.append('board_id', boardId);
@@ -41,7 +41,7 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
         await dispatch(boardActions.createCardThunk(formData));
 
         // setAddCardActive(false);
-        setEditCardName(false);
+        setEditCardDescription(false);
     };
 
     // const handleClose = () => {
@@ -49,7 +49,7 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
     // };
 
     return (
-        <div className={style.editCardForm}>
+        <div className={style.editCardDescriptionForm}>
             <form onSubmit={handleSubmit}>
                 <div className={style.formErrors}>
                     {errors.map((error, ind) => (
@@ -57,14 +57,13 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
                     ))}
                 </div>
                 <div className={style.inputWrapper}>
-                    <input
-                    name='name'
-                    type='text'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)} required
-                    onBlur={() => setEditCardName(false)}
+                    <textarea
+                    name='description'
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    onBlur={() => setEditCardDescription(false)}
                     autoFocus
-                    />
+                    ></textarea>
                 </div>
                 {/* <div className={style.btnWrapper}>
                     <button type='submit' className={style.mainBtn}>Add Card</button>
@@ -77,4 +76,4 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
     );
 };
 
-export default EditCardNameForm;
+export default EditCardDescriptionForm;

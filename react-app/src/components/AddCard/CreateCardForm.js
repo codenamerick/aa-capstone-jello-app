@@ -67,6 +67,8 @@ const CreateCardForm = ({setAddCardActive, cardListId}) => {
                     placeholder='Enter a title for this card...'
                     value={name}
                     onChange={(e) => setName(e.target.value)} required
+                    autoFocus
+                    onBlur={() => setAddCardActive(false)}
                     />
                 </div>
                 <div className={style.btnWrapper}>

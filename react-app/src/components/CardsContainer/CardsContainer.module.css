@@ -86,8 +86,17 @@
 
 .cardDescriptionWrapper h3 {
     font-size: 17px;
+    padding-left: 5px;
 }
 
 .descriptionContent {
     padding: 24px 0 16px 32px;
+}
+
+.descriptionContent p {
+    width: fit-content;
+}
+
+.descriptionContent p:hover {
+    cursor: pointer;
 }
