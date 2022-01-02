@@ -69,3 +69,8 @@
     cursor: pointer;
     transform: scale(1.2);
 }
+
+.formErrors div {
+    color: #E71E23;
+    margin-top: 10px;
+}
