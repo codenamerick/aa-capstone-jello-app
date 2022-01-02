@@ -13,12 +13,19 @@
 }
 
 .trashIconWrapper {
-    bottom: 4px;
+    align-items: center;
+    background: #535355;
+    border-radius: 50%;
+    bottom: 6px;
     color: #A1A19D;
-    display: none;
+    display: flex;
+    height: 28px;
+    justify-content: center;
     position: absolute;
-    right: 8px;
-    transition: all 200ms;
+    right: 4px;
+    transition: transform 200ms;
+    visibility: hidden;
+    width: 28px;
 }
 
 .trashIconWrapper:hover {
@@ -32,7 +39,7 @@
 }
 
 .card:hover .trashIconWrapper {
-    display: block;
+    visibility: visible;
 }
 
 .cardDetailsWrapper {

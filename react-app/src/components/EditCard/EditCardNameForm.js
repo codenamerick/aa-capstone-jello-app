@@ -11,6 +11,7 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
     const user_id = sessionUser['user'].id;
     const [name, setName] = useState(selectedCard.name);
     const [errors, setErrors] = useState([]);
+    const cardId = selectedCard.id;
 
     const validate = () => {
         const validationErrors = [];
@@ -34,19 +35,16 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
         const formData = new FormData();
 
         formData.append('name', name);
+        formData.append('description', selectedCard.description);
         formData.append('user_id', user_id);
-        // formData.append('list_id', cardListId);
-        formData.append('board_id', boardId);
+        formData.append('listId', selectedCard.list_id);
+        formData.append('boardId', boardId);
+        formData.append('cardId', cardId);
 
-        await dispatch(boardActions.createCardThunk(formData));
+        await dispatch(boardActions.editCardThunk(formData, +boardId));
 
-        // setAddCardActive(false);
         setEditCardName(false);
     };
-
-    // const handleClose = () => {
-    //     setAddCardActive(false);
-    // };
 
     return (
         <div className={style.editCardForm}>
@@ -66,12 +64,6 @@ const EditCardNameForm = ({setEditCardName, selectedCard}) => {
                     autoFocus
                     />
                 </div>
-                {/* <div className={style.btnWrapper}>
-                    <button type='submit' className={style.mainBtn}>Add Card</button>
-                    <div onClick={handleClose} className={style.closBtn}>
-                        <i className="fas fa-times"></i>
-                    </div>
-                </div> */}
             </form>
         </div>
     );

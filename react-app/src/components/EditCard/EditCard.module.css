@@ -26,3 +26,34 @@
     min-width: 100%;
     width: 100%;
 }
+
+.btnWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.mainBtn {
+    background: #fff;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    padding: 8px 14px;
+    transition: all 200ms;
+}
+
+.mainBtn:hover {
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.closeBtn i {
+    transition: all 200ms;
+}
+
+.closeBtn i:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}

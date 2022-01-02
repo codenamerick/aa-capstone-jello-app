@@ -11,6 +11,7 @@ const EditCardDescriptionForm = ({setEditCardDescription, selectedCard}) => {
     const user_id = sessionUser['user'].id;
     const [description, setDescription] = useState(selectedCard.description);
     const [errors, setErrors] = useState([]);
+    const cardId = selectedCard.id;
 
     const validate = () => {
         const validationErrors = [];
@@ -34,19 +35,16 @@ const EditCardDescriptionForm = ({setEditCardDescription, selectedCard}) => {
         const formData = new FormData();
 
         formData.append('name', selectedCard.name);
+        formData.append('description', description);
         formData.append('user_id', user_id);
-        // formData.append('list_id', cardListId);
-        formData.append('board_id', boardId);
+        formData.append('listId', selectedCard.list_id);
+        formData.append('boardId', boardId);
+        formData.append('cardId', cardId);
 
-        await dispatch(boardActions.createCardThunk(formData));
+        await dispatch(boardActions.editCardThunk(formData, +boardId));
 
-        // setAddCardActive(false);
         setEditCardDescription(false);
     };
-
-    // const handleClose = () => {
-    //     setAddCardActive(false);
-    // };
 
     return (
         <div className={style.editCardDescriptionForm}>
@@ -61,16 +59,16 @@ const EditCardDescriptionForm = ({setEditCardDescription, selectedCard}) => {
                     name='description'
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    onBlur={() => setEditCardDescription(false)}
+                    // onBlur={() => setEditCardDescription(false)}
                     autoFocus
                     ></textarea>
                 </div>
-                {/* <div className={style.btnWrapper}>
-                    <button type='submit' className={style.mainBtn}>Add Card</button>
-                    <div onClick={handleClose} className={style.closBtn}>
+                <div className={style.btnWrapper}>
+                    <button type='submit' className={style.mainBtn}>Save</button>
+                    <div onClick={() => setEditCardDescription(false)} className={style.closeBtn}>
                         <i className="fas fa-times"></i>
                     </div>
-                </div> */}
+                </div>
             </form>
         </div>
     );

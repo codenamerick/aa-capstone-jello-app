@@ -57,9 +57,10 @@ const createCard = (list) => ({
     list
 });
 
-const editCard = (list) => ({
+const editCard = (card, boardId) => ({
     type: EDIT_CARD,
-    list
+    card,
+    boardId
 });
 
 const deleteCard = (list, cardId) => ({
@@ -169,6 +170,20 @@ export const createCardThunk = (list) => async(dispatch) => {
     return data;
 };
 
+export const editCardThunk = (card, boardId) => async(dispatch) => {
+    const listId = card.get('listId');
+    const cardId = card.get('cardId');
+    const res = await fetch(`/api/boards/${boardId}/lists/${listId}/cards/${cardId}`, {
+        method: 'PUT',
+        body: card
+    });
+
+    const data = await res.json();
+    dispatch(editCard(data, boardId));
+
+    return data;
+};
+
 export const deleteCardThunk = (list, cardId) => async(dispatch) => {
     const {board_id, id} = list
     const res = await fetch(`/api/boards/${board_id}/lists/${id}/cards/${cardId}`, {
@@ -222,6 +237,14 @@ export default function boardReducer(state = {}, action) {
             newState = {...state};
             const cardListIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists[cardListIndex] = action.list;
+
+            return newState;
+        case EDIT_CARD:
+            newState = {...state};
+            const editCardListIndex = newState[action.boardId].lists.findIndex((list) => list.id === action.card.list_id);
+            const editCardsList = newState[action.boardId].lists[editCardListIndex].cards;
+            const editCardIndex = editCardsList.findIndex((card) => card.id === action.card.id);
+            newState[action.boardId].lists[editCardListIndex].cards[editCardIndex] = action.card;
 
             return newState;
         case DELETE_CARD:

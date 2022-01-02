@@ -33,7 +33,7 @@ def new_card(boardId, listId):
 
 
 @card_routes.route('/<int:boardId>/lists/<int:listId>/cards/<int:cardId>', methods=['PUT'])
-@login_required
+# @login_required
 def edit_card(boardId, listId, cardId):
     board = Board.query.get(int(boardId))
     list = List.query.get(int(listId))
@@ -46,7 +46,7 @@ def edit_card(boardId, listId, cardId):
         card.description=form.data['description']
         db.session.commit()
 
-        return list.to_dict()
+        return card.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

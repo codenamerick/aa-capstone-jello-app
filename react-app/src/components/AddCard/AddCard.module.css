@@ -61,11 +61,11 @@
     cursor: pointer;
 }
 
-.closBtn i {
+.closeBtn i {
     transition: all 200ms;
 }
 
-.closBtn i:hover {
+.closeBtn i:hover {
     cursor: pointer;
     transform: scale(1.2);
 }

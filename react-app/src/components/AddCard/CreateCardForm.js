@@ -73,7 +73,7 @@ const CreateCardForm = ({setAddCardActive, cardListId}) => {
                 </div>
                 <div className={style.btnWrapper}>
                     <button type='submit' className={style.mainBtn}>Add Card</button>
-                    <div onClick={handleClose} className={style.closBtn}>
+                    <div onClick={handleClose} className={style.closeBtn}>
                         <i className="fas fa-times"></i>
                     </div>
                 </div>
