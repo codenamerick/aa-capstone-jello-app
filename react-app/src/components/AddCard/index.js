@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import style from './AddCard.module.css';
 
-const AddCardBtn = () => {
-    // const [showMainModal, setShowMainModal] = useState(false);
-    // const [cardId, setCardId] = useState('');
+const AddCardBtn = ({setAddCardActive, setListIdOnCard, cardListId}) => {
+    const handleClick = () => {
+        setListIdOnCard(cardListId)
+        setAddCardActive(true);
+    };
 
     return (
-        <div className={style.AddCardBtn}>
+        <div className={style.AddCardBtn} onClick={handleClick}>
             <div>
                 <i className="fas fa-plus"></i>
                 <p>Add a card</p>

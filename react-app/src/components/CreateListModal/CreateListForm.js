@@ -11,7 +11,6 @@ const CreateListForm = ({setShowMainModal}) => {
     const user_id = sessionUser['user'].id;
     const [name, setName] = useState('');
     const [errors, setErrors] = useState([]);
-    const [addCardActive, setAddCardActive] = useState(false);
 
     const reset = () => {
         setName('');

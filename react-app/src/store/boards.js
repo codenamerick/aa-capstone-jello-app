@@ -9,6 +9,11 @@ const CREATE_LIST = 'boards/CREATE_LIST';
 const EDIT_LIST = 'boards/EDIT_LIST';
 const DELETE_LIST = 'boards/DELETE_LIST';
 
+// Card consts
+const CREATE_CARD = 'boards/CREATE_CARD';
+const EDIT_CARD = 'boards/EDIT_CARD';
+const DELETE_CARD = 'boards/DELETE_CARD';
+
 // Board actions
 const getBoards = (boards) => ({
     type: GET_BOARDS,
@@ -43,6 +48,22 @@ const editList = (list) => ({
 
 const deleteList = (list) => ({
     type: DELETE_LIST,
+    list
+});
+
+// Card actions
+const createCard = (list) => ({
+    type: CREATE_CARD,
+    list
+});
+
+const editCard = (list) => ({
+    type: EDIT_CARD,
+    list
+});
+
+const deleteCard = (list) => ({
+    type: DELETE_CARD,
     list
 });
 
@@ -132,6 +153,21 @@ export const deleteListThunk = (list) => async(dispatch) => {
     return data;
 };
 
+// Cards Thunk
+export const createCardThunk = (list) => async(dispatch) => {
+    const boardId = list.get('board_id');
+    const listId = list.get('list_id');
+    const res = await fetch(`/api/boards/${boardId}/lists/${listId}/cards`, {
+        method: 'POST',
+        body: list
+    });
+
+    const data = await res.json();
+    dispatch(createCard(data));
+
+    return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -167,6 +203,12 @@ export default function boardReducer(state = {}, action) {
             const deleteIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists.splice(deleteIndex, 1);
             newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice()
+
+            return newState;
+        case CREATE_CARD:
+            newState = {...state};
+            const cardListIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
+            newState[action.list.board_id].lists[cardListIndex] = action.list;
 
             return newState;
         case 'logout':

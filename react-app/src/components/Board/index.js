@@ -17,6 +17,8 @@ const Board = () => {
     const lists = useSelector((state) => state.boards?.[boardId]?.lists);
     const [listId, setListId] = useState('');
     const [listMenuActive, setListMenuActive] = useState(false);
+    const [addCardActive, setAddCardActive] = useState(false);
+    const [listIdOnCard, setListIdOnCard] = useState('');
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
@@ -62,8 +64,7 @@ const Board = () => {
                             <CardsContainer list={list}/>
                         </div>
                         <div>
-                            <AddCardBtn />
-                            <CreateCardForm />
+                            {addCardActive && listIdOnCard === list.id ? <CreateCardForm setAddCardActive={setAddCardActive} cardListId={list.id} /> : <AddCardBtn setAddCardActive={setAddCardActive} setListIdOnCard={setListIdOnCard} cardListId={list.id} />}
                         </div>
                     </div>
                 ))}

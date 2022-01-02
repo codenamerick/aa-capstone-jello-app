@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import * as boardActions from '../../store/boards';
 import style from './AddCard.module.css';
 
-const CreateCardForm = () => {
-    // const [showMainModal, setShowMainModal] = useState(false);
-    // const [cardId, setCardId] = useState('');
+const CreateCardForm = ({setAddCardActive, cardListId}) => {
+    const {boardId} = useParams();
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session);
     const user_id = sessionUser['user'].id;
     const [name, setName] = useState('');
@@ -37,16 +39,17 @@ const CreateCardForm = () => {
 
         formData.append('name', name);
         formData.append('user_id', user_id);
-        // formData.append('board_id', boardId);
+        formData.append('list_id', cardListId);
+        formData.append('board_id', boardId);
 
-        // await dispatch(boardActions.createListThunk(formData));
+        await dispatch(boardActions.createCardThunk(formData));
 
         reset();
-        // setShowMainModal(false);
+        setAddCardActive(false);
     };
 
     const handleClose = () => {
-        // setShowMainModal(false);
+        setAddCardActive(false);
     };
 
     return (
