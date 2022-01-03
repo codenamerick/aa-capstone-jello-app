@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import style from "./Board.module.css";
 import CreateListFormModal from '../CreateListModal';
 
 const BoardNavSeconday = ({currentBoard}) => {
-    const sessionUser = useSelector(state => state.session.user);
-    const userName = sessionUser.username;
+    // const sessionUser = useSelector(state => state.session.user);
+    // const userName = sessionUser.username;
 
     return (
         <nav className={style.boardNavSecondary}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Redirect, Link, useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import style from "./Board.module.css";
 import BoardNav from './BoardNav';
@@ -20,6 +20,11 @@ const Board = () => {
     const [addCardActive, setAddCardActive] = useState(false);
     const [listIdOnCard, setListIdOnCard] = useState('');
     const currentBoard = useSelector((state) => state.boards?.[boardId]);
+    const sessionUser = useSelector((state) => state.session);
+    const currentBoardMembers = currentBoard?.members;
+    const userId = sessionUser.user.id;
+    const currentUsername = sessionUser.user.username;
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(boardActions.getBoardsThunk());
@@ -32,6 +37,10 @@ const Board = () => {
     const deleteListBtn = (
         <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
+
+    if (!currentBoardMembers?.includes(userId)) {
+        history.push(`/${currentUsername}/boards`)
+    }
 
     return (
         <div className={style.boardWrapper}>
