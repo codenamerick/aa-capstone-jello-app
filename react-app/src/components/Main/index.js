@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from "./Main.module.css";
 import heroImage from './assets/hero-image.svg';
+import appImage from './assets/inner-app.svg';
 
 const Main = () => {
 
@@ -25,7 +26,7 @@ const Main = () => {
             </section>
             <section className={style.productShowcaseLarge}>
                 <div>
-                    <h2>Image Placeholder</h2>
+                    <img src={appImage} alt='' />
                 </div>
             </section>
             <footer>
