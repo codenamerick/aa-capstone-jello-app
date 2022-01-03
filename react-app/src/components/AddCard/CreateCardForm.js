@@ -38,6 +38,7 @@ const CreateCardForm = ({setAddCardActive, cardListId}) => {
         const formData = new FormData();
 
         formData.append('name', name);
+        formData.append('description', 'Add a more detailed description...');
         formData.append('user_id', user_id);
         formData.append('list_id', cardListId);
         formData.append('board_id', boardId);
@@ -68,7 +69,6 @@ const CreateCardForm = ({setAddCardActive, cardListId}) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)} required
                     autoFocus
-                    onBlur={() => setAddCardActive(false)}
                     />
                 </div>
                 <div className={style.btnWrapper}>

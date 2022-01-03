@@ -36,7 +36,7 @@ const CardDetails = ({setShowMainModal, list, cardId}) => {
                     <h3>Description</h3>
                 </div>
                 <div className={style.descriptionContent}>
-                    {editCardDescription ? <EditCardDescriptionForm selectedCard={selectedCard} setEditCardDescription={setEditCardDescription} /> : <p onClick={() => setEditCardDescription(true)}>{selectedCard.description ? selectedCard.description:'Add a more detailed description...'}</p>}
+                    {editCardDescription ? <EditCardDescriptionForm selectedCard={selectedCard} setEditCardDescription={setEditCardDescription} /> : <p onClick={() => setEditCardDescription(true)}>{!selectedCard.description || '' ? 'Add a more detailed description...' : selectedCard.description}</p>}
                 </div>
             </div>
         </div>

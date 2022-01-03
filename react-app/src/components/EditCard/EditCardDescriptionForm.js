@@ -59,7 +59,6 @@ const EditCardDescriptionForm = ({setEditCardDescription, selectedCard}) => {
                     name='description'
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    // onBlur={() => setEditCardDescription(false)}
                     autoFocus
                     ></textarea>
                 </div>

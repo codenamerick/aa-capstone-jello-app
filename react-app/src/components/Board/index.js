@@ -38,6 +38,9 @@ const Board = () => {
         <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
 
+    console.log('current user---: ', userId)
+    console.log('board members---: ', currentBoardMembers)
+
     if (!currentBoardMembers?.includes(userId)) {
         history.push(`/${currentUsername}/boards`)
     }

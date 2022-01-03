@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, FileField
+from wtforms import StringField, BooleanField, FileField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
 
 def valid_name(form, field):
@@ -11,3 +11,4 @@ def valid_name(form, field):
 
 class NewCardForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), valid_name])
+    description = TextAreaField('description')

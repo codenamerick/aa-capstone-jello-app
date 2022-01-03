@@ -20,6 +20,7 @@ def new_card(boardId, listId):
     if form.validate_on_submit() and current_user in board.members:
         card = Card(
             name=form.data['name'],
+            description=form.data['description'],
             user_id=current_user.id,
             list_id=listId
         )

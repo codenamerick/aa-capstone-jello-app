@@ -16,9 +16,11 @@ const CardsContainer = ({list}) => {
     return (
         <div className={style.CardsContainer}>
             {list.cards?.map((card) => (
-                <div key={card.id} className={style.card} onClick={() => {setShowMainModal(true); setCardId(card.id);}}>
-                    <div>
-                        <p>{card.name}</p>
+                <div className={style.openCardDetails} key={card.id}>
+                    <div className={style.card} onClick={() => {setShowMainModal(true); setCardId(card.id);}}>
+                        <div>
+                            <p>{card.name}</p>
+                        </div>
                     </div>
                     <div className={style.trashIconWrapper} onMouseOver={() => setCardId(card.id)} onClick={deleteCard}>
                         <i className="fas fa-trash-alt"></i>
