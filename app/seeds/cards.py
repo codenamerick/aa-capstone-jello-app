@@ -38,6 +38,9 @@ def seed_cards():
     card_twelve = Card(
         name='Take a look at the next project Card 12', description='This is a card description.', user_id=2, list_id=4
     )
+    card_thirteen = Card(
+        name='Take a look at the next project Card 13', description='This is a card description.', user_id=1, list_id=3
+    )
 
     db.session.add(card_one)
     db.session.add(card_two)
@@ -51,6 +54,7 @@ def seed_cards():
     db.session.add(card_ten)
     db.session.add(card_elleven)
     db.session.add(card_twelve)
+    db.session.add(card_thirteen)
 
     db.session.commit()
 
