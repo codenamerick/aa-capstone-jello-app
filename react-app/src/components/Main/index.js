@@ -32,10 +32,10 @@ const Main = () => {
                 <div>
                     <p>Crafted By:</p>
                     <div className={style.iconWrapper}>
-                        <a href='https://github.com/codenamerick' target='_blank' className={style.socialLink}>
+                        <a href='https://github.com/codenamerick' target='_blank' rel='noopener noreferrer' className={style.socialLink}>
                             <i className="fab fa-github-square"></i>
                         </a>
-                        <a href='https://www.linkedin.com/in/rick-arocho/' target='_blank' className={style.socialLink}>
+                        <a href='https://www.linkedin.com/in/rick-arocho/' target='_blank' rel='noopener noreferrer' className={style.socialLink}>
                             <i className="fab fa-linkedin"></i>
                         </a>
                     </div>
