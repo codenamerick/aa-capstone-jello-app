@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import Main from './components/Main';
 import Dashboard from './components/Dashboard';
 import Board from './components/Board';
+import LostPage from './components/LostPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,9 @@ function App() {
         <ProtectedRoute path={`/:username/boards`} exact={true} >
           <Dashboard />
         </ProtectedRoute>
+        <Route path='/' >
+          <LostPage />
+        </Route>
 
       </Switch>
     </BrowserRouter>
