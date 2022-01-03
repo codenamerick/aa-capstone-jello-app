@@ -32,7 +32,7 @@
     color: #000;
 }
 
-.mainBtn, .secondaryBtn {
+.mainBtn, .secondaryBtn, .boardNameWrapper {
     background: #fff;
     border-radius: 4px;
     color: #000;
@@ -67,10 +67,15 @@
 }
 
 /* secondary board nav */
-.secondaryBtn {
+.secondaryBtn, .boardNameWrapper {
     background: #3D3D40;
     color: #fff;
     margin-left: 4px;
+}
+
+.boardNameWrapper {
+    font-weight: 500;
+    margin-left: 0;
 }
 
 .secondaryBtn:hover {
@@ -96,10 +101,13 @@
     background: #3D3D40;
     border-radius: 4px;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: space-between;
     max-height: 100%;
     min-width: 272px;
-    padding: 10px;
-    overflow-y: scroll;
+    padding: 10px 8px;
     width: 272px;
 }
 
@@ -107,7 +115,8 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 4px;
+    margin-bottom: 6px;
+    padding: 8px;
 }
 
 .listHeader > p {
@@ -146,4 +155,10 @@
     right: -8px;
     top: -8px;
     z-index: 13;
+}
+
+/* cards styling */
+.cardsComponentWrapper {
+    max-height: 100%;
+    overflow-y: scroll;
 }

@@ -9,6 +9,11 @@ const CREATE_LIST = 'boards/CREATE_LIST';
 const EDIT_LIST = 'boards/EDIT_LIST';
 const DELETE_LIST = 'boards/DELETE_LIST';
 
+// Card consts
+const CREATE_CARD = 'boards/CREATE_CARD';
+const EDIT_CARD = 'boards/EDIT_CARD';
+const DELETE_CARD = 'boards/DELETE_CARD';
+
 // Board actions
 const getBoards = (boards) => ({
     type: GET_BOARDS,
@@ -44,6 +49,24 @@ const editList = (list) => ({
 const deleteList = (list) => ({
     type: DELETE_LIST,
     list
+});
+
+// Card actions
+const createCard = (list) => ({
+    type: CREATE_CARD,
+    list
+});
+
+const editCard = (card, boardId) => ({
+    type: EDIT_CARD,
+    card,
+    boardId
+});
+
+const deleteCard = (list, cardId) => ({
+    type: DELETE_CARD,
+    list,
+    cardId
 });
 
 // Board Thunks
@@ -132,6 +155,47 @@ export const deleteListThunk = (list) => async(dispatch) => {
     return data;
 };
 
+// Cards Thunk
+export const createCardThunk = (list) => async(dispatch) => {
+    const boardId = list.get('board_id');
+    const listId = list.get('list_id');
+    const res = await fetch(`/api/boards/${boardId}/lists/${listId}/cards`, {
+        method: 'POST',
+        body: list
+    });
+
+    const data = await res.json();
+    dispatch(createCard(data));
+
+    return data;
+};
+
+export const editCardThunk = (card, boardId) => async(dispatch) => {
+    const listId = card.get('listId');
+    const cardId = card.get('cardId');
+    const res = await fetch(`/api/boards/${boardId}/lists/${listId}/cards/${cardId}`, {
+        method: 'PUT',
+        body: card
+    });
+
+    const data = await res.json();
+    dispatch(editCard(data, boardId));
+
+    return data;
+};
+
+export const deleteCardThunk = (list, cardId) => async(dispatch) => {
+    const {board_id, id} = list
+    const res = await fetch(`/api/boards/${board_id}/lists/${id}/cards/${cardId}`, {
+        method: 'DELETE',
+    });
+
+    const data = await res.json();
+    dispatch(deleteCard(data, cardId));
+
+    return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -166,7 +230,30 @@ export default function boardReducer(state = {}, action) {
             newState = {...state};
             const deleteIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists.splice(deleteIndex, 1);
-            newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice()
+            newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice();
+
+            return newState;
+        case CREATE_CARD:
+            newState = {...state};
+            const cardListIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
+            newState[action.list.board_id].lists[cardListIndex] = action.list;
+
+            return newState;
+        case EDIT_CARD:
+            newState = {...state};
+            const editCardListIndex = newState[action.boardId].lists.findIndex((list) => list.id === action.card.list_id);
+            const editCardsList = newState[action.boardId].lists[editCardListIndex].cards;
+            const editCardIndex = editCardsList.findIndex((card) => card.id === action.card.id);
+            newState[action.boardId].lists[editCardListIndex].cards[editCardIndex] = action.card;
+
+            return newState;
+        case DELETE_CARD:
+            newState = {...state};
+            const deleteCardListIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
+            const cardsList = newState[action.list.board_id].lists[deleteCardListIndex].cards;
+            const deleteCardIndex = cardsList.findIndex((card) => card.id === action.cardId);
+            newState[action.list.board_id].lists[deleteCardListIndex].cards.splice(deleteCardIndex, 1);
+            newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice();
 
             return newState;
         case 'logout':

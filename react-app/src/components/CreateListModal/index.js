@@ -8,7 +8,7 @@ const CreateListFormModal = () => {
 
     return (
         <>
-            <div onClick={() => setShowMainModal(true)}>Create New List</div>
+            <div onClick={() => setShowMainModal(true)} className={style.secondaryBtn}>Create New List</div>
             {showMainModal && (
                 <MainModal onClose={() => setShowMainModal(false)}>
                     <CreateListForm setShowMainModal={setShowMainModal}/>

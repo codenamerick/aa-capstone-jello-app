@@ -8,7 +8,7 @@ const CreateListForm = ({setShowMainModal}) => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session);
-    const user_id = sessionUser['user'].id
+    const user_id = sessionUser['user'].id;
     const [name, setName] = useState('');
     const [errors, setErrors] = useState([]);
 

@@ -1,0 +1,76 @@
+.AddCardBtn {
+    align-items: center;
+    border-radius: 4px;
+    color: #A1A19D;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 8px;
+}
+
+.AddCardBtn > div {
+    align-items: center;
+    display: flex;
+}
+
+.AddCardBtn > div i {
+    margin-right: 8px;
+}
+
+.AddCardBtn:hover {
+    background: #303031;
+    color: #fff;
+    cursor: pointer;
+}
+
+.createCardForm input {
+    background: #000;
+    border: 1px solid #9150FB;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+.createCardForm input:focus {
+    border: 1px solid #9150FB;
+    outline: none;
+}
+
+.btnWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.mainBtn {
+    background: #fff;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    padding: 8px 14px;
+    transition: all 200ms;
+}
+
+.mainBtn:hover {
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.closeBtn i {
+    transition: all 200ms;
+}
+
+.closeBtn i:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.formErrors div {
+    color: #E71E23;
+    margin-top: 10px;
+}

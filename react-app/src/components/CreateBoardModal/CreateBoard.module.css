@@ -31,7 +31,6 @@
 }
 
 /* modal forms */
-
 .formWrapper {
     background: #18181B;
     border-radius: 4px;
@@ -40,6 +39,7 @@
     margin: 0 auto;
     max-width: 400px;
     padding: 38px 16px;
+    width: 100vw;
 }
 
 .inputWrapper {

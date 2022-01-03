@@ -1,7 +1,6 @@
 .authWrapper {
     background: #101011;
-    height: 100vh;
-    padding: 80px 16px 0 16px;
+    padding: 80px 16px 80px 16px;
 }
 
 .authWrapper > div {

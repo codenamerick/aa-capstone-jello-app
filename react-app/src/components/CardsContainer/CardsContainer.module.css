@@ -1,0 +1,113 @@
+.CardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card {
+    background: #535355;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 8px;
+    /* position: relative; */
+}
+
+.openCardDetails {
+    position: relative;
+}
+
+.trashIconWrapper {
+    align-items: center;
+    background: #535355;
+    border-radius: 50%;
+    bottom: 5px;
+    color: #A1A19D;
+    display: flex;
+    height: 28px;
+    justify-content: center;
+    position: absolute;
+    right: 4px;
+    transition: transform 200ms;
+    visibility: hidden;
+    width: 28px;
+}
+
+.trashIconWrapper:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.card:hover, .trashIconWrapper:hover {
+    background: #303031;
+    cursor: pointer;
+}
+
+.openCardDetails:hover .trashIconWrapper {
+    visibility: visible;
+}
+
+.cardDetailsWrapper {
+    background: #3D3D40;
+    border-radius: 4px;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 768px;
+    padding: 26px;
+    width: 100vw;
+}
+
+.cardHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.cardNameWrapper {
+    width: 95%;
+}
+
+.cardNameWrapper, .cardDescriptionWrapper {
+    align-items: center;
+    display: flex;
+}
+
+.closeIcon i {
+    transition: all 200ms;
+}
+
+.closeIcon i:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.cardNameWrapper i, .cardDescriptionWrapper svg {
+    margin-right: 8px;
+}
+
+.cardNameWrapper h2 {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.cardNameWrapper h2:hover {
+    cursor: pointer;
+}
+
+.cardDescriptionWrapper h3 {
+    font-size: 17px;
+    padding-left: 5px;
+}
+
+.descriptionContent {
+    padding: 24px 0 16px 32px;
+}
+
+.descriptionContent p {
+    width: fit-content;
+}
+
+.descriptionContent p:hover {
+    cursor: pointer;
+}
