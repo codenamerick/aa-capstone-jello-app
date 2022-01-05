@@ -1,5 +1,5 @@
 # Jello
-[Jello](https://jello-io.herokuapp.com/) is a Trello clone developed by a promising App Academy student. 
+[Jello](https://jello-io.herokuapp.com/) is a Trello clone crafted using technologies such as React / Redux / Flask / and Python to provide users with a simple user interface designed to make tracking tasks a breeze. 
 
 <img src='https://res.cloudinary.com/dedpxzbak/image/upload/v1640805060/Jello-io_n3agu1.png'>
 
