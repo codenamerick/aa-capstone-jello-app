@@ -6,10 +6,11 @@ import CardDetails from "./CardDetails";
 import * as boardActions from '../../store/boards';
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
-const CardsContainer = ({list}) => {
+const CardsContainer = ({list, onDragEnd}) => {
     const dispatch = useDispatch();
     const [showMainModal, setShowMainModal] = useState(false);
     const [cardId, setCardId] = useState('');
+
     const deleteCard = () => {
         dispatch(boardActions.deleteCardThunk(list, cardId))
     };
@@ -43,6 +44,7 @@ const CardsContainer = ({list}) => {
                                 )}
                             </Draggable>
                         ))}
+                        {provided.placeholder}
                     </div>
                 )}
             </Droppable>

@@ -17,6 +17,7 @@ const Board = () => {
     const dispatch = useDispatch();
     const lists = useSelector((state) => state.boards?.[boardId]?.lists);
     const [listId, setListId] = useState('');
+    const [listIndex, setListIndex] = useState('');
     const [listMenuActive, setListMenuActive] = useState(false);
     const [addCardActive, setAddCardActive] = useState(false);
     const [listIdOnCard, setListIdOnCard] = useState('');
@@ -41,8 +42,41 @@ const Board = () => {
         <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
 
-    const onDragEnd = () => {
-        // to do... for reordering columns.
+    const onDragEnd = (res) => {
+        const {destination, source, draggableId} = res;
+
+        if (!destination) {
+            return;
+        }
+
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) {
+            return;
+        }
+
+        const list = lists[listIndex];
+        console.log('LIST', list);
+
+        const newCards = list.cards.slice();
+        console.log('cards COPY---: ', newCards);
+
+        newCards.splice(source.index, 1);
+        newCards.splice(destination.index, 0, draggableId);
+
+        const newList = {
+            ...list,
+            cards: newCards,
+        };
+
+        // const newState = {
+        //     ...state,
+        //     lists: {
+        //         ...state.lists,
+        //         [newList.id]: newList,
+        //     },
+        // };
+
+        // setState(newState);
     };
 
     return (
@@ -55,8 +89,8 @@ const Board = () => {
                 <BoardNavSeconday currentBoard={currentBoard} />
                 <div className={style.boardCanvas}>
                     <DragDropContext onDragEnd={onDragEnd}>
-                        {lists?.map((list) => (
-                            <div key={list.id} className={style.listWrapper}>
+                        {lists?.map((list, index) => (
+                            <div key={list.id} className={style.listWrapper} onMouseOver={() => {setListIndex(index)}}>
                                 <div className={style.listHeader}>
                                     <p>{list.name}</p>
                                     <div>
