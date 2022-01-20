@@ -17,7 +17,7 @@ const Board = () => {
     const dispatch = useDispatch();
     const lists = useSelector((state) => state.boards?.[boardId]?.lists);
     const [listId, setListId] = useState('');
-    const [listIndex, setListIndex] = useState('');
+    const [dragListIndex, setDragListIndex] = useState('');
     const [listMenuActive, setListMenuActive] = useState(false);
     const [addCardActive, setAddCardActive] = useState(false);
     const [listIdOnCard, setListIdOnCard] = useState('');
@@ -42,7 +42,7 @@ const Board = () => {
         <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
 
-    const onDragEnd = (res) => {
+    const onDragEnd = async (res) => {
         const {destination, source, draggableId} = res;
 
         if (!destination) {
@@ -54,19 +54,25 @@ const Board = () => {
             return;
         }
 
-        const list = lists[listIndex];
-        console.log('LIST', list);
+        // const list = lists[listIndex];
+        // console.log('LIST', res);
 
-        const newCards = list.cards.slice();
-        console.log('cards COPY---: ', newCards);
+        // const newCards = list.cards.slice();
+        // console.log('cards COPY---: ', newCards);
 
-        newCards.splice(source.index, 1);
-        newCards.splice(destination.index, 0, draggableId);
+        // newCards.splice(source.index, 1);
+        // newCards.splice(destination.index, 0, draggableId);
 
-        const newList = {
-            ...list,
-            cards: newCards,
-        };
+        // trying to update board state with rearranged cards
+
+        await dispatch(boardActions.dragCardThunk(boardId, dragListIndex, source.droppableId, destination.droppableId, source.index, destination.index, draggableId));
+
+        // const newList = {
+        //     ...list,
+        //     cards: newCards,
+        // };
+
+        // console.log('New LIST---: ', newList);
 
         // const newState = {
         //     ...state,
@@ -90,7 +96,7 @@ const Board = () => {
                 <div className={style.boardCanvas}>
                     <DragDropContext onDragEnd={onDragEnd}>
                         {lists?.map((list, index) => (
-                            <div key={list.id} className={style.listWrapper} onMouseOver={() => {setListIndex(index)}}>
+                            <div key={list.id} className={style.listWrapper} onMouseOver={() => {setDragListIndex(index)}}>
                                 <div className={style.listHeader}>
                                     <p>{list.name}</p>
                                     <div>

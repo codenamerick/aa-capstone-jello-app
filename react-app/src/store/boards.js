@@ -13,6 +13,7 @@ const DELETE_LIST = 'boards/DELETE_LIST';
 const CREATE_CARD = 'boards/CREATE_CARD';
 const EDIT_CARD = 'boards/EDIT_CARD';
 const DELETE_CARD = 'boards/DELETE_CARD';
+const DRAG_CARD = 'boards/MOVE_CARD';
 
 // Board actions
 const getBoards = (boards) => ({
@@ -67,6 +68,25 @@ const deleteCard = (list, cardId) => ({
     type: DELETE_CARD,
     list,
     cardId
+});
+
+const dragCard = (
+    boardId,
+    dragListIndex,
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId
+) => ({
+    type: DRAG_CARD,
+    boardId,
+    dragListIndex,
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId
 });
 
 // Board Thunks
@@ -196,6 +216,34 @@ export const deleteCardThunk = (list, cardId) => async(dispatch) => {
     return data;
 };
 
+export const dragCardThunk = (
+    boardId,
+    dragListIndex,
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId
+) => async(dispatch) => {
+    // const {board_id, id} = list
+    // const res = await fetch(`/api/boards/${board_id}/lists/${id}/cards/${cardId}`, {
+    //     method: 'DELETE',
+    // });
+
+    // const data = await res.json();
+    dispatch(dragCard(
+        boardId,
+        dragListIndex,
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId
+    ));
+
+    // return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -254,6 +302,35 @@ export default function boardReducer(state = {}, action) {
             const deleteCardIndex = cardsList.findIndex((card) => card.id === action.cardId);
             newState[action.list.board_id].lists[deleteCardListIndex].cards.splice(deleteCardIndex, 1);
             newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice();
+
+            return newState;
+        case DRAG_CARD:
+            newState = {...state};
+            // console.log('DRAG card ACTION---: ', action);
+            // console.log('MOVE CARD state----: ', newState[action.boardId].lists[action.droppableIndexStart].cards);
+
+            // console.log('LIST INDEXXXX----: ', newState[action.boardId].lists[action.dragListIndex])
+
+            if (action.droppableIdStart === action.droppableIdEnd) {
+                const listCopy = newState[action.boardId].lists[action.dragListIndex].cards.slice()
+
+                const card = listCopy.splice(action.droppableIndexStart, 1);
+                listCopy.splice(action.droppableIndexEnd, 0, ...card);
+
+                console.log('list copy from REDUCER---: ', card);
+                const newList = {
+                    ...newState[action.boardId].lists[action.dragListIndex],
+                    cards: listCopy,
+                };
+
+                // console.log('NEW LIST---: ', newList);
+
+                newState[action.boardId].lists[action.dragListIndex].cards = newList.cards;
+
+                // newState[action.boardId].lists = newState[action.boardId].lists.slice()
+
+                // console.log('STATEEEE----: ', newState)
+            }
 
             return newState;
         case 'logout':
