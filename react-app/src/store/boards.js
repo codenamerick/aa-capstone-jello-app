@@ -306,11 +306,12 @@ export default function boardReducer(state = {}, action) {
             return newState;
         case DRAG_CARD:
             newState = {...state};
-            // console.log('DRAG card ACTION---: ', action);
+            console.log('DRAG card ACTION---: ', action);
             // console.log('MOVE CARD state----: ', newState[action.boardId].lists[action.droppableIndexStart].cards);
 
             // console.log('LIST INDEXXXX----: ', newState[action.boardId].lists[action.dragListIndex])
 
+            // move in same list
             if (action.droppableIdStart === action.droppableIdEnd) {
                 const listCopy = newState[action.boardId].lists[action.dragListIndex].cards.slice()
 
@@ -330,6 +331,18 @@ export default function boardReducer(state = {}, action) {
                 // newState[action.boardId].lists = newState[action.boardId].lists.slice()
 
                 // console.log('STATEEEE----: ', newState)
+            }
+
+            if (action.droppableIdStart !== action.droppableIdEnd) {
+                const listSource = newState[action.boardId].lists.find(list => +action.droppableIdStart === list.id);
+
+                const listDestination = newState[action.boardId].lists.find(list => +action.droppableIdEnd === list.id);
+
+                const card = listSource.cards.splice(action.droppableIndexStart, 1);
+
+                console.log('LIST SOURCE--->> ', card)
+
+                listDestination.cards.splice(action.droppableIndexEnd, 0, ...card);
             }
 
             return newState;
