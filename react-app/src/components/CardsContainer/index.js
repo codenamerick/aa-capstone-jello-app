@@ -17,7 +17,7 @@ const CardsContainer = ({list, onDragEnd}) => {
 
     return (
         <div>
-            <Droppable droppableId={`${list.id}`}>
+            <Droppable droppableId={`${list.id}`} type='task'>
                 {provided => (
                     <div
                         className={style.CardsContainer}
@@ -25,7 +25,7 @@ const CardsContainer = ({list, onDragEnd}) => {
                         {...provided.droppableProps}
                     >
                         {list.cards?.map((card, cardIndex) => (
-                            <Draggable draggableId={`${card.id}`} index={cardIndex} key={card.id}>
+                            <Draggable draggableId={`card-${card.id}`} index={cardIndex} key={card.id}>
                                 {provided => (
                                     <div className={style.openCardDetails}
                                         {...provided.draggableProps}
