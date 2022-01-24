@@ -320,7 +320,11 @@ export default function boardReducer(state = {}, action) {
             // move list itself
             if (action.payload.type === 'list') {
                 const list = newState[action.payload.boardId].lists.splice(action.payload.droppableIndexStart, 1);
+                console.log('reducer LIST----: ', list)
+
                 newState[action.payload.boardId].lists.splice(action.payload.droppableIndexEnd, 0, ...list);
+
+                console.log('STATEEEE-----: ', newState)
 
                 return newState;
             }

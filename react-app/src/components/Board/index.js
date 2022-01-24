@@ -43,7 +43,7 @@ const Board = () => {
     );
 
     const onDragEnd = async (res) => {
-        const {destination, source, draggableId} = res;
+        const {destination, source, draggableId, type} = res;
 
         console.log('ON DRAG----: ', res);
 
@@ -56,7 +56,7 @@ const Board = () => {
             return;
         }
 
-        await dispatch(boardActions.dragCardThunk(boardId, dragListIndex, source.droppableId, destination.droppableId, source.index, destination.index, draggableId));
+        await dispatch(boardActions.dragCardThunk(boardId, dragListIndex, source.droppableId, destination.droppableId, source.index, destination.index, draggableId, type));
     };
 
     return (
