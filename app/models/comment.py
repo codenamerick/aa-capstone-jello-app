@@ -22,5 +22,5 @@ class Comment(db.Model):
             'card_id': self.card_id,
             'user_id': self.user_id,
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
-            'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
+            'updated_at': self.updated_at.strftime('%m/%d/%Y %H:%M:%S')
         }

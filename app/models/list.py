@@ -11,7 +11,7 @@ class List(db.Model):
     board_id = db.Column(db.Integer, db.ForeignKey('boards.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=func.now())
-    updated_at = db.Column(db.DateTime(), server_default=func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=func.now(), default=func.now())
 
     boards = db.relationship('Board', back_populates='lists')
     cards = db.relationship('Card', back_populates='lists', cascade='all, delete')
@@ -25,5 +25,5 @@ class List(db.Model):
             'board_id': self.board_id,
             'user_id': self.user_id,
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
-            'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
+            'updated_at': self.updated_at.strftime('%m/%d/%Y %H:%M:%S')
         }

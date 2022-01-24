@@ -275,10 +275,11 @@ export default function boardReducer(state = {}, action) {
             return {...state, [action.board.id]: action.board};
         case EDIT_LIST:
             newState = {...state};
+            console.log('list BEFORE change: ', newState[action.list.board_id].lists);
             const listIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists[listIndex] = action.list;
             newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice()
-
+            console.log('list AFTER change: ', newState[action.list.board_id].lists);
             return newState;
         case DELETE_LIST:
             newState = {...state};

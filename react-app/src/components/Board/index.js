@@ -46,6 +46,7 @@ const Board = () => {
         const {destination, source, draggableId, type} = res;
 
         console.log('ON DRAG----: ', res);
+        console.log('MY LISTS----: ', lists);
 
         if (!destination) {
             return;
