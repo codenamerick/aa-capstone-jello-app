@@ -42,6 +42,13 @@ const Board = () => {
         <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
 
+    // sort list by list_order
+    const sortedList = lists?.sort(function (a, b) {
+        return a.list_order - b.list_order;
+    });
+
+    console.log('SORTED LIST----: ', sortedList);
+
     const onDragEnd = async (res) => {
         const {destination, source, draggableId, type} = res;
 

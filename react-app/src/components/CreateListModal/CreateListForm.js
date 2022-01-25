@@ -45,7 +45,7 @@ const CreateListForm = ({setShowMainModal}) => {
         formData.append('user_id', user_id);
         formData.append('board_id', boardId);
         console.log('sending this to BACKEND---: ', listIndex)
-        formData.append('list_order', listIndex);
+        formData.append('list_order', String(listIndex));
 
         await dispatch(boardActions.createListThunk(formData));
 
