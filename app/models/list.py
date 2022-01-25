@@ -12,7 +12,7 @@ class List(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=func.now())
     updated_at = db.Column(db.DateTime(), onupdate=func.now(), default=func.now())
-    list_order = db.Column(db.Integer, nullable=False)
+    list_order = db.Column(db.Text, nullable=False)
 
     boards = db.relationship('Board', back_populates='lists')
     cards = db.relationship('Card', back_populates='lists', cascade='all, delete')

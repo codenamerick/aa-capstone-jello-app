@@ -12,4 +12,4 @@ def valid_name(form, field):
 
 class NewListForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), valid_name])
-    list_order=IntegerField('list_order', validators=[DataRequired()])
+    list_order=StringField('list_order', validators=[DataRequired()])
