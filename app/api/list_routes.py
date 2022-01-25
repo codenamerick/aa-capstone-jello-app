@@ -16,11 +16,19 @@ def new_list(boardId):
     form = NewListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    print('---------------')
+    print('form DATA----::: ', form.data)
+    print('---------------')
+
     if form.validate_on_submit() and current_user in board.members:
+        print('---------------')
+        print('form DATA----::: ', form.data)
+        print('---------------')
         list = List(
             name=form.data['name'],
             user_id=current_user.id,
-            board_id=boardId
+            board_id=boardId,
+            list_order=form.data['list_order']
         )
 
         db.session.add(list)

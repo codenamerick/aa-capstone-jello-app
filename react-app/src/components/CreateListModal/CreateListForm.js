@@ -11,6 +11,10 @@ const CreateListForm = ({setShowMainModal}) => {
     const user_id = sessionUser['user'].id;
     const [name, setName] = useState('');
     const [errors, setErrors] = useState([]);
+    const lists = useSelector((state) => state.boards?.[boardId]?.lists);
+    const listIndex = lists.length;
+
+    console.log('list INFO----: ', lists, listIndex)
 
     const reset = () => {
         setName('');
@@ -40,6 +44,8 @@ const CreateListForm = ({setShowMainModal}) => {
         formData.append('name', name);
         formData.append('user_id', user_id);
         formData.append('board_id', boardId);
+        console.log('sending this to BACKEND---: ', listIndex)
+        formData.append('list_order', listIndex);
 
         await dispatch(boardActions.createListThunk(formData));
 
