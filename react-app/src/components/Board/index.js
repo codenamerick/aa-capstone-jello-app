@@ -15,6 +15,7 @@ import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 const Board = () => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
+    const board = useSelector((state) => state.boards?.[boardId]);
     const lists = useSelector((state) => state.boards?.[boardId]?.lists);
     const [listId, setListId] = useState('');
     const [dragListIndex, setDragListIndex] = useState('');
@@ -43,11 +44,14 @@ const Board = () => {
     );
 
     // sort list by list_order
-    const sortedList = lists?.sort(function (a, b) {
-        return a.list_order - b.list_order;
-    });
+    // lists?.sort(function (a, b) {
+    //     return a - b;
+    // });
 
-    console.log('SORTED LIST----: ', sortedList);
+    // const sortedList = lists?.sort()
+
+    // console.log('SORTED LIST----: ', sortedList);
+    // console.log('MY LISTS----: ', lists);
 
     const onDragEnd = async (res) => {
         const {destination, source, draggableId, type} = res;
@@ -64,7 +68,7 @@ const Board = () => {
             return;
         }
 
-        await dispatch(boardActions.dragCardThunk(boardId, dragListIndex, source.droppableId, destination.droppableId, source.index, destination.index, draggableId, type));
+        await dispatch(boardActions.dragCardThunk(boardId, board, dragListIndex, source.droppableId, destination.droppableId, source.index, destination.index, draggableId, type));
     };
 
     return (

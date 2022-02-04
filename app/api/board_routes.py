@@ -1,8 +1,9 @@
+from sqlalchemy import Integer
 from sqlalchemy.sql.functions import user
 from .auth_routes import validation_errors_to_error_messages
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
-from app.models import Board, Member, User, db
+from app.models import Board, Member, List, User, db
 from app.forms.new_board_form import NewBoardForm
 from app.forms.edit_board_form import EditBoardForm
 
@@ -46,6 +47,48 @@ def new_board():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+@board_routes.route('/<int:boardId>/dragList', methods=['PUT'])
+@login_required
+def drag_board_list(boardId):
+    board = Board.query.get(int(boardId))
+    my_lists = board.lists
+
+    print('--------------------------')
+    print('REQ------', request.get_json())
+    print('--------------------------')
+    req = request.get_json()
+
+    # find list being moved
+    dragging_list_id = int(req['draggableId'].split('-')[1])
+    dragged_list = List.query.get(dragging_list_id)
+
+    print('HHHHHHHHHHHH--------HHHHHH_________-----', dragged_list)
+
+    # drag list itself
+    if req['dragType'] == 'list':
+        column = board.lists[req['droppableIndexStart']]
+        print('--------------------------')
+        print('WE DRAGGING LISTS NOW!!!', req['droppableIndexStart'], list, ':::', my_lists)
+        print('--------------------------')
+        # my_lists.pop(req['droppableIndexStart'])
+        print('--------------------------')
+        print('WE DRAGGING LISTS NOW!!!', req['droppableIndexStart'], list, ':::', my_lists)
+        print('--------------------------')
+        # my_lists.insert(req['droppableIndexEnd'], column)
+        print('--------------------------')
+        print('WE DRAGGING LISTS NOW!!!', req['droppableIndexEnd'], list, ':::', my_lists)
+        print('--------------------------')
+
+        return board.to_dict()
+
+    else:
+        print('--------------------------')
+        print('TRY AGAIN!!!')
+        print('--------------------------')
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
 @board_routes.route('/<int:boardId>', methods=['PUT'])
 @login_required
 def edit_board(boardId):
@@ -61,6 +104,7 @@ def edit_board(boardId):
         return board.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 
 @board_routes.route('/<int:boardId>', methods=['DELETE'])

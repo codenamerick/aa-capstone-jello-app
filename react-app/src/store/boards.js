@@ -72,6 +72,7 @@ const deleteCard = (list, cardId) => ({
 
 const dragCard = (
     boardId,
+    board,
     dragListIndex,
     droppableIdStart,
     droppableIdEnd,
@@ -83,6 +84,7 @@ const dragCard = (
     type: DRAG_CARD,
     payload: {
         boardId,
+        board,
         dragListIndex,
         droppableIdStart,
         droppableIdEnd,
@@ -222,6 +224,7 @@ export const deleteCardThunk = (list, cardId) => async(dispatch) => {
 
 export const dragCardThunk = (
     boardId,
+    board,
     dragListIndex,
     droppableIdStart,
     droppableIdEnd,
@@ -230,24 +233,42 @@ export const dragCardThunk = (
     draggableId,
     type
 ) => async(dispatch) => {
-    // const {board_id, id} = list
-    // const res = await fetch(`/api/boards/${board_id}/lists/${id}/cards/${cardId}`, {
-    //     method: 'DELETE',
-    // });
+    const dragData = {
+        dragListIndex: dragListIndex,
+        droppableIdStart: droppableIdStart,
+        droppableIdEnd: droppableIdEnd,
+        droppableIndexStart: droppableIndexStart,
+        droppableIndexEnd: droppableIndexEnd,
+        draggableId: draggableId,
+        dragType: type,
+    }
 
-    // const data = await res.json();
-    dispatch(dragCard(
-        boardId,
-        dragListIndex,
-        droppableIdStart,
-        droppableIdEnd,
-        droppableIndexStart,
-        droppableIndexEnd,
-        draggableId,
-        type
-    ));
+    console.log('before FETCH-----: ', board)
 
-    // return data;
+    const res = await fetch(`/api/boards/${boardId}/dragList`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dragData),
+    });
+
+    const data = await res.json();
+    console.log('After FETCH-------', data)
+    // dispatch(dragCard(
+    //     boardId,
+    //     board,
+    //     dragListIndex,
+    //     droppableIdStart,
+    //     droppableIdEnd,
+    //     droppableIndexStart,
+    //     droppableIndexEnd,
+    //     draggableId,
+    //     type
+    // ));
+    dispatch(dragCard(data));
+
+    return data;
 };
 
 // Boards reducer
@@ -313,57 +334,61 @@ export default function boardReducer(state = {}, action) {
             return newState;
         case DRAG_CARD:
             newState = {...state};
+            console.log('MY STATE----: ', newState);
             console.log('DRAG card ACTION---: ', action);
+
+            newState[action.payload.boardId.id] = action.payload.boardId;
+
             // console.log('MOVE CARD state----: ', newState[action.boardId].lists[action.droppableIndexStart].cards);
 
             // console.log('LIST INDEXXXX----: ', newState[action.boardId].lists[action.dragListIndex])
 
             // move list itself
-            if (action.payload.type === 'list') {
-                const list = newState[action.payload.boardId].lists.splice(action.payload.droppableIndexStart, 1);
-                console.log('reducer LIST----: ', list)
+            // if (action.payload.type === 'list') {
+            //     const list = newState[action.payload.boardId].lists.splice(action.payload.droppableIndexStart, 1);
+            //     console.log('reducer LIST----: ', list)
 
-                newState[action.payload.boardId].lists.splice(action.payload.droppableIndexEnd, 0, ...list);
+            //     newState[action.payload.boardId].lists.splice(action.payload.droppableIndexEnd, 0, ...list);
 
-                console.log('STATEEEE-----: ', newState)
+            //     console.log('STATEEEE-----: ', newState)
 
-                return newState;
-            }
+            //     return newState;
+            // }
 
             // move card in same list
-            if (action.payload.droppableIdStart === action.payload.droppableIdEnd) {
-                const listCopy = newState[action.payload.boardId].lists[action.payload.dragListIndex].cards.slice()
+            // if (action.payload.droppableIdStart === action.payload.droppableIdEnd) {
+            //     const listCopy = newState[action.payload.boardId].lists[action.payload.dragListIndex].cards.slice()
 
-                const card = listCopy.splice(action.payload.droppableIndexStart, 1);
-                listCopy.splice(action.payload.droppableIndexEnd, 0, ...card);
+            //     const card = listCopy.splice(action.payload.droppableIndexStart, 1);
+            //     listCopy.splice(action.payload.droppableIndexEnd, 0, ...card);
 
-                console.log('list copy from REDUCER---: ', card);
-                const newList = {
-                    ...newState[action.payload.boardId].lists[action.payload.dragListIndex],
-                    cards: listCopy,
-                };
+            //     console.log('list copy from REDUCER---: ', card);
+            //     const newList = {
+            //         ...newState[action.payload.boardId].lists[action.payload.dragListIndex],
+            //         cards: listCopy,
+            //     };
 
                 // console.log('NEW LIST---: ', newList);
 
-                newState[action.payload.boardId].lists[action.payload.dragListIndex].cards = newList.cards;
+               // newState[action.payload.boardId].lists[action.payload.dragListIndex].cards = newList.cards;
 
                 // newState[action.payload.boardId].lists = newState[action.payload.boardId].lists.slice()
 
                 // console.log('STATEEEE----: ', newState)
-            }
+            //}
 
             // move card from one list to another
-            if (action.payload.droppableIdStart !== action.payload.droppableIdEnd) {
-                const listSource = newState[action.payload.boardId].lists.find(list => +action.payload.droppableIdStart === list.id);
+            // if (action.payload.droppableIdStart !== action.payload.droppableIdEnd) {
+            //     const listSource = newState[action.payload.boardId].lists.find(list => +action.payload.droppableIdStart === list.id);
 
-                const listDestination = newState[action.payload.boardId].lists.find(list => +action.payload.droppableIdEnd === list.id);
+            //     const listDestination = newState[action.payload.boardId].lists.find(list => +action.payload.droppableIdEnd === list.id);
 
-                const card = listSource.cards.splice(action.payload.droppableIndexStart, 1);
+            //     const card = listSource.cards.splice(action.payload.droppableIndexStart, 1);
 
-                console.log('LIST SOURCE--->> ', card)
+            //     console.log('LIST SOURCE--->> ', card)
 
-                listDestination.cards.splice(action.payload.droppableIndexEnd, 0, ...card);
-            }
+            //     listDestination.cards.splice(action.payload.droppableIndexEnd, 0, ...card);
+            // }
 
             return newState;
         case 'logout':
