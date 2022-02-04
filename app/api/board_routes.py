@@ -62,7 +62,16 @@ def drag_board_list(boardId):
     dragging_list_id = int(req['draggableId'].split('-')[1])
     dragged_list = List.query.get(dragging_list_id)
 
-    print('HHHHHHHHHHHH--------HHHHHH_________-----', dragged_list)
+    # list destination
+    list_destination = int(req['droppableIndexEnd'])
+
+    print('HHHHHHHHHHHH--------HHHHHH_________-----', dragged_list.list_order)
+
+    dragged_list.list_order = list_destination
+
+    print('NEW ORDER-----', dragged_list.list_order)
+
+    db.session.commit()
 
     # drag list itself
     if req['dragType'] == 'list':
