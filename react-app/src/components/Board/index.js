@@ -44,9 +44,9 @@ const Board = () => {
     );
 
     // sort list by list_order
-    lists?.sort(function (a, b) {
-        return a.list_order - b.list_order;
-    });
+    // lists?.sort(function (a, b) {
+    //     return a - b;
+    // });
 
     // const sortedList = lists?.sort()
 
