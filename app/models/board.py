@@ -26,7 +26,7 @@ class Board(db.Model):
             'member_list': [user.to_dict() for user in self.members],
             'lists': [list.to_dict() for list in self.lists],
             'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
-            'updated_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S')
+            'updated_at': self.updated_at.strftime('%m/%d/%Y %H:%M:%S')
         }
 
     def member_ids(self):

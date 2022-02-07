@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, FileField
+from sqlalchemy import Integer
+from wtforms import StringField, IntegerField, BooleanField, FileField
 from wtforms.validators import DataRequired, ValidationError
 
 def valid_name(form, field):
@@ -11,3 +12,4 @@ def valid_name(form, field):
 
 class NewListForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), valid_name])
+    list_order=StringField('list_order', validators=[DataRequired()])

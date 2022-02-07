@@ -10,12 +10,15 @@ import DeleteListBtn from '../DeleteListModal';
 import CardsContainer from '../CardsContainer';
 import AddCardBtn from '../AddCard';
 import CreateCardForm from '../AddCard/CreateCardForm';
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 
 const Board = () => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
+    const board = useSelector((state) => state.boards?.[boardId]);
     const lists = useSelector((state) => state.boards?.[boardId]?.lists);
     const [listId, setListId] = useState('');
+    const [dragListIndex, setDragListIndex] = useState('');
     const [listMenuActive, setListMenuActive] = useState(false);
     const [addCardActive, setAddCardActive] = useState(false);
     const [listIdOnCard, setListIdOnCard] = useState('');
@@ -40,6 +43,34 @@ const Board = () => {
         <DeleteListBtn setListMenuActive={setListMenuActive} listMenuActive={listMenuActive} listId={listId} />
     );
 
+    // sort list by list_order
+    // lists?.sort(function (a, b) {
+    //     return a - b;
+    // });
+
+    // const sortedList = lists?.sort()
+
+    // console.log('SORTED LIST----: ', sortedList);
+    // console.log('MY LISTS----: ', lists);
+
+    const onDragEnd = async (res) => {
+        const {destination, source, draggableId, type} = res;
+
+        console.log('ON DRAG----: ', res);
+        console.log('MY LISTS----: ', lists);
+
+        if (!destination) {
+            return;
+        }
+
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) {
+            return;
+        }
+
+        await dispatch(boardActions.dragCardThunk(boardId, board, dragListIndex, source.droppableId, destination.droppableId, source.index, destination.index, draggableId, type));
+    };
+
     return (
         <>
         {isLoaded && (
@@ -48,38 +79,55 @@ const Board = () => {
             <div className={style.boardWrapper}>
                 <BoardNav />
                 <BoardNavSeconday currentBoard={currentBoard} />
-                <div className={style.boardCanvas}>
-                    {lists?.map((list) => (
-                        <div key={list.id} className={style.listWrapper}>
-                            <div className={style.listHeader}>
-                                <p>{list.name}</p>
-                                <div>
-                                    <div id={`listMenuBtn-${list.id}`} className={style.listMenuBtn} onClick={() => {setListId(list.id);setListMenuActive(true);}}>
-                                        <i className="fas fa-ellipsis-h"></i>
-                                    </div>
-                                    {listMenuActive && (
-                                        <div>
-                                            {listId === list.id && (
-                                                <>
-                                                    <div className={style.listMenuModalBg} onClick={() => setListMenuActive(false)}></div>
-                                                    <div id={`list-menu-${list.id}`} className={style.listMenuWrapper}>
-                                                        {editListBtn}
-                                                        {deleteListBtn}
+                <div>
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId='all-lists' direction='horizontal' type='list'>
+                            {provided => (
+                                <div
+                                    className={style.boardCanvas}
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    {lists?.map((list, index) => (
+                                        <Draggable draggableId={`list-${list.id}`} index={index} key={list.id}>
+                                            {provided => (
+                                                <div className={style.listWrapper} onMouseOver={() => {setDragListIndex(index)}} {...provided.draggableProps} ref={provided.innerRef}>
+                                                    <div className={style.listHeader} {...provided.dragHandleProps}>
+                                                        <p>{list.name}</p>
+                                                        <div>
+                                                            <div id={`listMenuBtn-${list.id}`} className={style.listMenuBtn} onClick={() => {setListId(list.id);setListMenuActive(true);}}>
+                                                                <i className="fas fa-ellipsis-h"></i>
+                                                            </div>
+                                                            {listMenuActive && (
+                                                                <div>
+                                                                    {listId === list.id && (
+                                                                        <>
+                                                                            <div className={style.listMenuModalBg} onClick={() => setListMenuActive(false)}></div>
+                                                                            <div id={`list-menu-${list.id}`} className={style.listMenuWrapper}>
+                                                                                {editListBtn}
+                                                                                {deleteListBtn}
+                                                                            </div>
+                                                                        </>
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                </>
+                                                    <div className={style.cardsComponentWrapper}>
+                                                        <CardsContainer list={list}/>
+                                                    </div>
+                                                    <div>
+                                                        {addCardActive && listIdOnCard === list.id ? <CreateCardForm setAddCardActive={setAddCardActive} cardListId={list.id} /> : <AddCardBtn setAddCardActive={setAddCardActive} setListIdOnCard={setListIdOnCard} cardListId={list.id} />}
+                                                    </div>
+                                                </div>
                                             )}
-                                        </div>
-                                    )}
+                                        </Draggable>
+                                    ))}
+                                    {provided.placeholder}
                                 </div>
-                            </div>
-                            <div className={style.cardsComponentWrapper}>
-                                <CardsContainer list={list}/>
-                            </div>
-                            <div>
-                                {addCardActive && listIdOnCard === list.id ? <CreateCardForm setAddCardActive={setAddCardActive} cardListId={list.id} /> : <AddCardBtn setAddCardActive={setAddCardActive} setListIdOnCard={setListIdOnCard} cardListId={list.id} />}
-                            </div>
-                        </div>
-                    ))}
+                            )}
+                        </Droppable>
+                    </DragDropContext>
                 </div>
             </div>
             :

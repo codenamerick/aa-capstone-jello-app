@@ -13,6 +13,7 @@ const DELETE_LIST = 'boards/DELETE_LIST';
 const CREATE_CARD = 'boards/CREATE_CARD';
 const EDIT_CARD = 'boards/EDIT_CARD';
 const DELETE_CARD = 'boards/DELETE_CARD';
+const DRAG_CARD = 'boards/MOVE_CARD';
 
 // Board actions
 const getBoards = (boards) => ({
@@ -67,6 +68,31 @@ const deleteCard = (list, cardId) => ({
     type: DELETE_CARD,
     list,
     cardId
+});
+
+const dragCard = (
+    boardId,
+    board,
+    dragListIndex,
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId,
+    type
+) => ({
+    type: DRAG_CARD,
+    payload: {
+        boardId,
+        board,
+        dragListIndex,
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type
+    }
 });
 
 // Board Thunks
@@ -196,6 +222,55 @@ export const deleteCardThunk = (list, cardId) => async(dispatch) => {
     return data;
 };
 
+export const dragCardThunk = (
+    boardId,
+    board,
+    dragListIndex,
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId,
+    type
+) => async(dispatch) => {
+    const dragData = {
+        dragListIndex: dragListIndex,
+        droppableIdStart: droppableIdStart,
+        droppableIdEnd: droppableIdEnd,
+        droppableIndexStart: droppableIndexStart,
+        droppableIndexEnd: droppableIndexEnd,
+        draggableId: draggableId,
+        dragType: type,
+    }
+
+    // console.log('before FETCH-----: ', board)
+
+    // const res = await fetch(`/api/boards/${boardId}/dragList`, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(dragData),
+    // });
+
+    // const data = await res.json();
+    // console.log('After FETCH-------', data)
+    dispatch(dragCard(
+        boardId,
+        board,
+        dragListIndex,
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type
+    ));
+    // dispatch(dragCard(data));
+
+    // return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -221,10 +296,11 @@ export default function boardReducer(state = {}, action) {
             return {...state, [action.board.id]: action.board};
         case EDIT_LIST:
             newState = {...state};
+            console.log('list BEFORE change: ', newState[action.list.board_id].lists);
             const listIndex = newState[action.list.board_id].lists.findIndex((list) => list.id === action.list.id);
             newState[action.list.board_id].lists[listIndex] = action.list;
             newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice()
-
+            console.log('list AFTER change: ', newState[action.list.board_id].lists);
             return newState;
         case DELETE_LIST:
             newState = {...state};
@@ -254,6 +330,65 @@ export default function boardReducer(state = {}, action) {
             const deleteCardIndex = cardsList.findIndex((card) => card.id === action.cardId);
             newState[action.list.board_id].lists[deleteCardListIndex].cards.splice(deleteCardIndex, 1);
             newState[action.list.board_id].lists = newState[action.list.board_id].lists.slice();
+
+            return newState;
+        case DRAG_CARD:
+            newState = {...state};
+            // console.log('MY STATE----: ', newState);
+            // console.log('DRAG card ACTION---: ', action);
+
+            // newState[action.payload.boardId.id] = action.payload.boardId;
+
+            // console.log('MOVE CARD state----: ', newState[action.boardId].lists[action.droppableIndexStart].cards);
+
+            // console.log('LIST INDEXXXX----: ', newState[action.boardId].lists[action.dragListIndex])
+
+            // move list itself
+            if (action.payload.type === 'list') {
+                const list = newState[action.payload.boardId].lists.splice(action.payload.droppableIndexStart, 1);
+                console.log('reducer LIST----: ', list)
+
+                newState[action.payload.boardId].lists.splice(action.payload.droppableIndexEnd, 0, ...list);
+
+                console.log('STATEEEE-----: ', newState)
+
+                return newState;
+            }
+
+            // move card in same list
+            if (action.payload.droppableIdStart === action.payload.droppableIdEnd) {
+                const listCopy = newState[action.payload.boardId].lists[action.payload.dragListIndex].cards.slice()
+
+                const card = listCopy.splice(action.payload.droppableIndexStart, 1);
+                listCopy.splice(action.payload.droppableIndexEnd, 0, ...card);
+
+                console.log('list copy from REDUCER---: ', card);
+                const newList = {
+                    ...newState[action.payload.boardId].lists[action.payload.dragListIndex],
+                    cards: listCopy,
+                };
+
+                console.log('NEW LIST---: ', newList);
+
+               newState[action.payload.boardId].lists[action.payload.dragListIndex].cards = newList.cards;
+
+                newState[action.payload.boardId].lists = newState[action.payload.boardId].lists.slice()
+
+                console.log('STATEEEE----: ', newState)
+            }
+
+            // move card from one list to another
+            if (action.payload.droppableIdStart !== action.payload.droppableIdEnd) {
+                const listSource = newState[action.payload.boardId].lists.find(list => +action.payload.droppableIdStart === list.id);
+
+                const listDestination = newState[action.payload.boardId].lists.find(list => +action.payload.droppableIdEnd === list.id);
+
+                const card = listSource.cards.splice(action.payload.droppableIndexStart, 1);
+
+                console.log('LIST SOURCE--->> ', card)
+
+                listDestination.cards.splice(action.payload.droppableIndexEnd, 0, ...card);
+            }
 
             return newState;
         case 'logout':
