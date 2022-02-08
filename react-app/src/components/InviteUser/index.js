@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { MainModal } from "../../context/MainModal";
 import style from "../Board/Board.module.css";
+import InviteLink from "./InviteLink";
 
 const InviteUserModal = ({boardId}) => {
     const [showMainModal, setShowMainModal] = useState(false);
@@ -14,7 +15,7 @@ const InviteUserModal = ({boardId}) => {
             <div onClick={handleOpen} className={style.secondaryBtn}>Invite</div>
             {showMainModal && (
                 <MainModal onClose={() => {setShowMainModal(false);}}>
-                    Invite people
+                    <InviteLink boardId={boardId} setShowMainModal={setShowMainModal}/>
                 </MainModal>
             )}
         </>
