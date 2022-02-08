@@ -1,0 +1,48 @@
+.memberListWrapper {
+    align-items: center;
+    display: flex;
+    max-width: 500px;
+    padding: 0 16px;
+}
+
+.memberListAvatar {
+    align-items: center;
+    background: #3D3D40;
+    border: 1px solid #000;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    height: 38px;
+    justify-content: center;
+    margin-left: -8px;
+    position: relative;
+    min-width: 38px;
+    width: 38px;
+}
+
+.memberTooltip {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    color: white;
+    opacity: 0;
+    padding: 8px;
+    position: absolute;
+    top: 104%;
+    transform: scale(.7);
+    transition: all 200ms;
+    visibility: hidden;
+}
+
+.memberListAvatar:hover .memberTooltip {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+/* --- Media queries below --- */
+
+@media screen and (max-width: 720px) {
+    .memberListWrapper {
+        overflow-x: scroll;
+    }
+}

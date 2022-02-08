@@ -88,6 +88,10 @@
     margin-left: 0;
 }
 
+.secondaryNavLeft li {
+    margin-right: 4px;
+}
+
 /* board canvas */
 .boardCanvas {
     display: flex;

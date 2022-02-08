@@ -15,6 +15,9 @@ const EDIT_CARD = 'boards/EDIT_CARD';
 const DELETE_CARD = 'boards/DELETE_CARD';
 const DRAG_CARD = 'boards/MOVE_CARD';
 
+// Member consts
+const POST_MEMBER = "members/POST_MEMBER";
+
 // Board actions
 const getBoards = (boards) => ({
     type: GET_BOARDS,
@@ -93,6 +96,12 @@ const dragCard = (
         draggableId,
         type
     }
+});
+
+//Member actions
+const postMember = (board) => ({
+    type: POST_MEMBER,
+    board,
 });
 
 // Board Thunks
@@ -271,6 +280,21 @@ export const dragCardThunk = (
     // return data;
 };
 
+//Member thunks
+export const postMemberThunk = (boardId) => async (dispatch) => {
+    // console.log('THUNK---: ', boardId)
+    const response = await fetch(`/api/boards/${boardId}/members`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+    });
+    const data = await response.json();
+    dispatch(postMember(data));
+
+    return data;
+};
+
 // Boards reducer
 export default function boardReducer(state = {}, action) {
     let newState;
@@ -346,11 +370,11 @@ export default function boardReducer(state = {}, action) {
             // move list itself
             if (action.payload.type === 'list') {
                 const list = newState[action.payload.boardId].lists.splice(action.payload.droppableIndexStart, 1);
-                console.log('reducer LIST----: ', list)
+                // console.log('reducer LIST----: ', list)
 
                 newState[action.payload.boardId].lists.splice(action.payload.droppableIndexEnd, 0, ...list);
 
-                console.log('STATEEEE-----: ', newState)
+                // console.log('STATEEEE-----: ', newState)
 
                 return newState;
             }
@@ -362,19 +386,19 @@ export default function boardReducer(state = {}, action) {
                 const card = listCopy.splice(action.payload.droppableIndexStart, 1);
                 listCopy.splice(action.payload.droppableIndexEnd, 0, ...card);
 
-                console.log('list copy from REDUCER---: ', card);
+                // console.log('list copy from REDUCER---: ', card);
                 const newList = {
                     ...newState[action.payload.boardId].lists[action.payload.dragListIndex],
                     cards: listCopy,
                 };
 
-                console.log('NEW LIST---: ', newList);
+                // console.log('NEW LIST---: ', newList);
 
                newState[action.payload.boardId].lists[action.payload.dragListIndex].cards = newList.cards;
 
                 newState[action.payload.boardId].lists = newState[action.payload.boardId].lists.slice()
 
-                console.log('STATEEEE----: ', newState)
+                // console.log('STATEEEE----: ', newState)
             }
 
             // move card from one list to another
@@ -385,11 +409,20 @@ export default function boardReducer(state = {}, action) {
 
                 const card = listSource.cards.splice(action.payload.droppableIndexStart, 1);
 
-                console.log('LIST SOURCE--->> ', card)
+                // console.log('LIST SOURCE--->> ', card)
 
                 listDestination.cards.splice(action.payload.droppableIndexEnd, 0, ...card);
             }
 
+            return newState;
+        case POST_MEMBER:
+            newState = {...state};
+            // console.log('REDUCER!!---: ', action)
+            // boardId = action.board.id;
+            // if (boardId) {
+            //     newState[boardId].members = action.board.members;
+            //     newState[boardId].member_list = action.board.member_list;
+            // }
             return newState;
         case 'logout':
             newState = {};

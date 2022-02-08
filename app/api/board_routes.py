@@ -143,3 +143,22 @@ def delete_board(boardId):
         db.session.commit()
 
         return board.to_dict()
+
+
+
+@board_routes.route('/<int:boardId>/members', methods=['POST'])
+@login_required
+def edit_members(boardId):
+    userId = current_user.id
+    user = User.query.get(int(userId))
+    board = Board.query.get(int(boardId))
+    if user and user not in board.members:
+        member = Member(
+            user_id=userId,
+            board_id=boardId
+        )
+        db.session.add(member)
+        db.session.commit()
+        return board.to_dict()
+
+    return {'errors': "bad user data"}
