@@ -4,6 +4,7 @@ import style from "./Board.module.css";
 import CreateListFormModal from '../CreateListModal';
 import InviteUserModal from '../InviteUser';
 import { useParams } from 'react-router-dom';
+import MemberList from '../MemberList';
 
 const BoardNavSeconday = ({currentBoard}) => {
     // const sessionUser = useSelector(state => state.session.user);
@@ -25,6 +26,9 @@ const BoardNavSeconday = ({currentBoard}) => {
                     </li>
                     <li>
                         {inviteUserBtn}
+                    </li>
+                    <li>
+                        <MemberList boardId={boardId} />
                     </li>
                 </ul>
                 <ul>

@@ -1,0 +1,29 @@
+.memberListWrapper {
+    align-items: center;
+    display: flex;
+    max-width: 500px;
+    /* overflow-x: scroll; */
+    padding: 0 16px;
+}
+
+.memberListAvatar {
+    align-items: center;
+    background: #3D3D40;
+    border: 1px solid #000;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    height: 38px;
+    justify-content: center;
+    margin-left: -8px;
+    position: relative;
+    min-width: 38px;
+    width: 38px;
+}
+
+.memberTooltip {
+    background: chartreuse;
+    bottom: -26px;
+    color: black;
+    position: absolute;
+}
