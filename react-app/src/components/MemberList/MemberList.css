@@ -2,7 +2,6 @@
     align-items: center;
     display: flex;
     max-width: 500px;
-    /* overflow-x: scroll; */
     padding: 0 16px;
 }
 
@@ -22,8 +21,28 @@
 }
 
 .memberTooltip {
-    background: chartreuse;
-    bottom: -26px;
-    color: black;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    color: white;
+    opacity: 0;
+    padding: 8px;
     position: absolute;
+    top: 104%;
+    transform: scale(.7);
+    transition: all 200ms;
+    visibility: hidden;
+}
+
+.memberListAvatar:hover .memberTooltip {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+/* --- Media queries below --- */
+
+@media screen and (max-width: 720px) {
+    .memberListWrapper {
+        overflow-x: scroll;
+    }
 }
