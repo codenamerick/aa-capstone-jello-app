@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as boardActions from '../../store/boards';
 import style from "./Board.module.css";
 import BoardNav from './BoardNav';
@@ -23,10 +23,10 @@ const Board = () => {
     const [addCardActive, setAddCardActive] = useState(false);
     const [listIdOnCard, setListIdOnCard] = useState('');
     const currentBoard = useSelector((state) => state.boards?.[boardId]);
-    const sessionUser = useSelector((state) => state.session);
-    const currentBoardMembers = currentBoard?.members;
-    const userId = sessionUser.user.id;
-    const currentUsername = sessionUser.user.username;
+    // const sessionUser = useSelector((state) => state.session);
+    // const currentBoardMembers = currentBoard?.members;
+    // const userId = sessionUser.user.id;
+    // const currentUsername = sessionUser.user.username;
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -56,8 +56,8 @@ const Board = () => {
     const onDragEnd = async (res) => {
         const {destination, source, draggableId, type} = res;
 
-        console.log('ON DRAG----: ', res);
-        console.log('MY LISTS----: ', lists);
+        // console.log('ON DRAG----: ', res);
+        // console.log('MY LISTS----: ', lists);
 
         if (!destination) {
             return;
@@ -75,7 +75,7 @@ const Board = () => {
         <>
         {isLoaded && (
             <>
-        {currentBoardMembers?.includes(userId) ?
+        {/* {currentBoardMembers?.includes(userId) ? */}
             <div className={style.boardWrapper}>
                 <BoardNav />
                 <BoardNavSeconday currentBoard={currentBoard} />
@@ -130,11 +130,11 @@ const Board = () => {
                     </DragDropContext>
                 </div>
             </div>
-            :
-            <Redirect to={`/${currentUsername}/boards`} />}
+
+            {/* />} */}
             </>
             )}
-            </>
+        </>
     )
 };
 
