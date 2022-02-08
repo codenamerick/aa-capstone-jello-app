@@ -9,7 +9,7 @@ const MemberList = ({boardId}) => {
     const userId = useSelector(state => state.session.user.id);
 
     useEffect(() => {
-        if (!boardMembers.includes(userId)) {
+        if (!boardMembers?.includes(userId)) {
             dispatch(boardActions.postMemberThunk(boardId));
         }
     })
