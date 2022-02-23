@@ -242,15 +242,15 @@ export const dragCardThunk = (
     draggableId,
     type
 ) => async(dispatch) => {
-    const dragData = {
-        dragListIndex: dragListIndex,
-        droppableIdStart: droppableIdStart,
-        droppableIdEnd: droppableIdEnd,
-        droppableIndexStart: droppableIndexStart,
-        droppableIndexEnd: droppableIndexEnd,
-        draggableId: draggableId,
-        dragType: type,
-    }
+    // const dragData = {
+    //     dragListIndex: dragListIndex,
+    //     droppableIdStart: droppableIdStart,
+    //     droppableIdEnd: droppableIdEnd,
+    //     droppableIndexStart: droppableIndexStart,
+    //     droppableIndexEnd: droppableIndexEnd,
+    //     draggableId: draggableId,
+    //     dragType: type,
+    // }
 
     // console.log('before FETCH-----: ', board)
 
