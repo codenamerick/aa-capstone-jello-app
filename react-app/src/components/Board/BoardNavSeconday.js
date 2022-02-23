@@ -31,7 +31,7 @@ const BoardNavSeconday = ({currentBoard}) => {
                         <MemberList boardId={boardId} />
                     </li>
                 </ul>
-                <ul>
+                <ul className={style.secondaryNavRight}>
                     <li>
                         <div>
                             <CreateListFormModal />

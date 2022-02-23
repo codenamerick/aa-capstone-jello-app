@@ -171,3 +171,19 @@
     max-height: 100%;
     overflow-y: scroll;
 }
+
+
+/* --- Media queries below --- */
+
+@media screen and (max-width: 720px) {
+    .boardNavSecondary {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+}
+
+@media screen and (max-width: 545px) {
+    .secondaryNavRight {
+        padding-right: 16px;
+    }
+}
