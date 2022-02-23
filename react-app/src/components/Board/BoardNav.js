@@ -30,8 +30,13 @@ const BoardNav = () => {
           </li>
         </ul>
         <ul>
-          <li className={style.logoutBtn}>
-            <LogoutButton />
+          <li>
+            <div className={style.logoutBtn}>
+              <div className={style.navUsername}>
+                {userName},
+              </div>
+              <LogoutButton />
+            </div>
           </li>
         </ul>
       </div>

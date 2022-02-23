@@ -48,7 +48,13 @@
 }
 
 .logoutBtn {
+    align-items: center;
     color: #fff;
+    display: flex;
+}
+
+.navUsername {
+    margin-right: 6px;
 }
 
 .logoutBtn:hover {
