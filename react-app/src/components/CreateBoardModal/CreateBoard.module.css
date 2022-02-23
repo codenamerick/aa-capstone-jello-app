@@ -5,6 +5,7 @@
     margin-left: 4px;
     padding: 10px 16px;
     transition: all 200ms;
+    white-space: nowrap;
 }
 
 .primaryAddBtn:hover {

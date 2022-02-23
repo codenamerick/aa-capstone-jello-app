@@ -71,6 +71,7 @@
     background: #3D3D40;
     color: #fff;
     margin-left: 4px;
+    white-space: nowrap;
 }
 
 .boardNameWrapper {
@@ -86,6 +87,10 @@
 
 .secondaryBtn:first-child {
     margin-left: 0;
+}
+
+.secondaryNavLeft {
+    margin-right: 60px;
 }
 
 .secondaryNavLeft li {
