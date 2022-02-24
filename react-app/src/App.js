@@ -10,6 +10,8 @@ import Main from './components/Main';
 import Dashboard from './components/Dashboard';
 import Board from './components/Board';
 import LostPage from './components/LostPage';
+import MobileBoardNav from './components/MobileNav/MobileBoardNav';
+import BoardHamburger from './components/MobileNav/BoardHamburger';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,6 +52,8 @@ function App() {
           <User />
         </ProtectedRoute> */}
         <ProtectedRoute path={`/boards/:boardId`} exact={true} >
+          <BoardHamburger />
+          <MobileBoardNav />
           <Board />
         </ProtectedRoute>
         <ProtectedRoute path={`/:username/boards`} exact={true} >

@@ -3,10 +3,10 @@ import "./MobileNav.css";
 
 const BoardHamburger = () => {
   const [boardMobileMenuActive, setBoardMobileMenuActive] = useState('');
-  const boardHamburger = document.getElementById('board-hamburger');
+  const boardHamburger = document?.getElementById('board-hamburger');
 
   const handleHamburgerClick = () => {
-    boardHamburger.focus();
+    boardHamburger?.focus();
     setBoardMobileMenuActive('-open');
   };
 

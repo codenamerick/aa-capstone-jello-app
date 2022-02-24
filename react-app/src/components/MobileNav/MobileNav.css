@@ -6,7 +6,11 @@
     flex-direction: column;
     height: 26px;
     justify-content: space-between;
+    position: fixed;
+    right: 16px;
+    top: 15px;
     width: 32px;
+    z-index: 14;
 }
 
 .hamburger-line {
@@ -26,6 +30,17 @@
 
 .hamburger-bottom-open {
     transform: translateX(11px) rotate(-45deg) translateY(-16px);
+}
+
+.mobile-nav {
+    background: yellow;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    transform: translateX(100%);
+    transition: all 250ms;
+    width: 75%;
+    z-index: 12;
 }
 
 /* --- Media queries below --- */
