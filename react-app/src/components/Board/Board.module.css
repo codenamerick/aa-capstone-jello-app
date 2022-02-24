@@ -186,6 +186,10 @@
         overflow-x: scroll;
         overflow-y: hidden;
     }
+
+    .logoutBtn {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 545px) {

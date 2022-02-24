@@ -6,6 +6,7 @@ import LogoutButton from '../auth/LogoutButton';
 import CreateBoardMainBtn from '../CreateBoardModal/CreateBoardMainBtn';
 import style from "./Board.module.css";
 import logo from '../../components/Main/assets/jello-logo-main-final.svg';
+import BoardHamburger from '../MobileNav/BoardHamburger';
 
 const BoardNav = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -31,6 +32,7 @@ const BoardNav = () => {
         </ul>
         <ul>
           <li>
+            <BoardHamburger />
             <div className={style.logoutBtn}>
               <div className={style.navUsername}>
                 {userName},
