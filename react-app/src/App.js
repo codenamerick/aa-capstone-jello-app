@@ -57,6 +57,7 @@ function App() {
           <Board />
         </ProtectedRoute>
         <ProtectedRoute path={`/:username/boards`} exact={true} >
+          <BoardHamburger />
           <Dashboard />
         </ProtectedRoute>
         <Route path='/' >
