@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import "./MobileNav.css";
 
 const MobileBoardNav = ({boardMobileMenuOpen}) => {
@@ -8,8 +9,18 @@ const MobileBoardNav = ({boardMobileMenuOpen}) => {
 
   return (
     <div className={`mobile-nav ${boardMobileMenuOpen}`}>
-        {userName}
-
+        <ul>
+          <li>
+            <NavLink to='/login' exact={true} activeClassName='active'>
+              Log in
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/sign-up' exact={true}>
+              Sign up
+            </NavLink>
+          </li>
+        </ul>
     </div>
   );
 }

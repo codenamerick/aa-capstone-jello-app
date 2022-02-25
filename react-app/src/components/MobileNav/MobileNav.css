@@ -35,6 +35,7 @@
 .mobile-nav {
     background: #5A30D4;
     height: 100%;
+    padding: 120px 32px;
     position: fixed;
     right: 0;
     transform: translateX(100%);
@@ -44,15 +45,34 @@
     z-index: 12;
 }
 
+.mobile-nav li {
+    margin-bottom: 20px;
+}
+
+.mobile-nav a {
+    color: white;
+    font-weight: bold;
+    font-size: 48px;
+}
+
 .mobile-nav-open {
     transform: translateX(0%);
 }
 
 .mobile-nav-transparent-bg {
+    background: rgba(0, 0, 0, 0.5);
     height: 100%;
+    opacity: 0;
     position: fixed;
+    transition: all 300ms;
+    visibility: hidden;
     width: 100%;
     z-index: 11;
+}
+
+.mobile-nav-transparent-bg-active {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* --- Media queries below --- */
