@@ -33,12 +33,12 @@
 }
 
 .mobile-nav {
-    background: yellow;
+    background: #5A30D4;
     height: 100%;
     position: fixed;
     right: 0;
     transform: translateX(100%);
-    transition: all 250ms;
+    transition: transform 250ms;
     visibility: hidden;
     width: 75%;
     z-index: 12;
